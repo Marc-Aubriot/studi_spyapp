@@ -67,6 +67,28 @@ class Agent
         $conn = null;
     }
     
+    // Fonction pour mettre à jour un champ de l'agent dans la base de données
+    public function updateChamp($champ, $nouvelleValeur) {
+        $db = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $query = "UPDATE agent SET " . $champ . "=:nouvelleValeur WHERE code_identification=:code_identification";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':nouvelleValeur', $nouvelleValeur);
+        $stmt->bindParam(':code_identification', $this->code_identification);
+        $stmt->execute();
+
+        // Cloture la connexion
+        $conn = null;
+    }
+
+     // Fonction pour delete l'agent dans la base de données
+    public function delete() {
+        $db = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $sql = "DELETE FROM agent WHERE code_identification = :code_identification";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':code_identification', $this->code_identification, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
     public function getCodeIdentification()
     {
         return $this->code_identification;
