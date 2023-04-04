@@ -77,7 +77,7 @@ class Agent
         $stmt->execute();
 
         // Cloture la connexion
-        $conn = null;
+        $db = null;
     }
 
      // Fonction pour delete l'agent dans la base de données
@@ -86,9 +86,13 @@ class Agent
         $sql = "DELETE FROM agent WHERE code_identification = :code_identification";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':code_identification', $this->code_identification, PDO::PARAM_STR);
-        return $stmt->execute();
+        $stmt->execute();
+
+        // Cloture la connexion
+        $db = null;
     }
 
+    // Méthodes pour racevoir les paramètres de l'Agent
     public function getCodeIdentification()
     {
         return $this->code_identification;
@@ -118,6 +122,34 @@ class Agent
     {
         return $this->specialite;
     }
+
+    
+    // Méthodes pour modifier les paramètres de l'Agent
+    public function setCodeIdentification($nouveau_code_identification) {
+        $this->code_identification = $nouveau_code_identification;
+    }
+
+    public function setNom($nouveau_nom) {
+        $this->nom = $nouveau_nom;
+    }
+
+    public function setPrenom($nouveau_prenom) {
+        $this->prenom = $nouveau_prenom;
+    }
+
+    public function setDateDeNaissance($nouvelle_date_de_naissance) {
+        $this->date_de_naissance = $nouvelle_date_de_naissance;
+    }
+
+    public function setNationalite($nouvelle_nationalite) {
+        $this->nationalite = $nouvelle_nationalite;
+    }
+
+    public function setSpecialite($nouvelle_specialite) {
+        $this->specialite = $nouvelle_specialite;
+    }
+
+    
 }
 
 
