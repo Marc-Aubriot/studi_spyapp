@@ -31,7 +31,7 @@ class Agent
         $stmt->bindValue(':code_identification', $this->code_identification);
         $stmt->bindValue(':nom', $this->nom);
         $stmt->bindValue(':prénom', $this->prenom);
-        $stmt->bindValue(':date_naissance', $this->date_de_naissance);
+        $stmt->bindValue(':date_de_naissance', $this->date_de_naissance);
         $stmt->bindValue(':nationalité', $this->nationalite);
         $stmt->bindValue(':spécialités', $this->specialite);
         // Exécution de la requête
