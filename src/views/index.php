@@ -1,3 +1,12 @@
+<?php
+    if (DEBUG) { define('INDEXVIEW', true); }
+    if (DEBUG) { 
+        echo "<div class='DEBUG'>";
+        include_once ROOT . '/src/controllers/DebugController.php';
+        echo "</div>";
+    } 
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 

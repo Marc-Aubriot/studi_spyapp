@@ -30,3 +30,7 @@ h1,h2,ul,ol,li,p {
 a {
     color: rgb(25, 214, 25);
 }
+
+.DEBUG  {
+    background-color: white;
+}
