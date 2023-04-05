@@ -33,6 +33,13 @@ if (INDEXVIEW) {
     echo '<br>';
 }
 
+// controllers/MissionController.php
+if (MISSIONCONTROLLER) { 
+    echo '<br>';
+    echo 'controllers/MissionController.php fonctionne';
+    echo '<br>';
+}
+
 // intilisation la connection PDO à la DB
 try {
     $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);

@@ -17,9 +17,9 @@ class IndexController extends Controller {
         $stmt->execute();
 
         $missions = $stmt->fetchAll();    
-
+        $detail = false;
         // render la page 
-        $this->render('index.php', ['missions' => $missions]);
+        $this->render('index.php', ['missions' => $missions, 'detail' => $detail]);
 
     }
 }
