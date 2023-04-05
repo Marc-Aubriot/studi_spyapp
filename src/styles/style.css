@@ -1,3 +1,32 @@
-h1 {
-    color: red;
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-top: 1vh;
+    background-color: black;
+    border: 2px solid rgb(25, 214, 25);
+    height: 98vh;
+    margin-bottom: 1vh;
+}
+
+header {
+    height: 5%;
+}
+
+main {
+    height: 89%;
+}
+
+footer {
+    height: 2%;
+}
+
+h1,h2,ul,ol,li,p {
+    color: rgb(25, 214, 25);
+}
+
+a {
+    color: rgb(25, 214, 25);
 }
