@@ -23,6 +23,10 @@ footer {
     height: 2%;
 }
 
+b, .text {
+    color: white;
+}
+
 h1,h2,ul,ol,li,p {
     color: rgb(25, 214, 25);
 }
