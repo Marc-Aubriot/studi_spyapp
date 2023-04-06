@@ -1,7 +1,6 @@
 <?php
 
-include_once ROOT . '/src/models/Mission.php';
-if (DEBUG) { define('INDEXCONTROLLER', true); }
+if (DEBUG) { define('BACKOFFICECONTROLLER', true); }
 
 class IndexController extends Controller {
 
@@ -17,7 +16,7 @@ class IndexController extends Controller {
         $stmt->execute();
 
         $missions = $stmt->fetchAll();    
-        $content = 'pageMissionListe';
+        $content = 'pageBackoffice';
         // render la page 
         $this->render('index.php', ['missions' => $missions, 'content' => $content]);
 

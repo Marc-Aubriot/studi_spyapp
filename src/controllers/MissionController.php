@@ -10,9 +10,9 @@ class MissionController extends Controller {
         // fetch la mission par son nom de code via le slug
         $mission = Mission::getMissionById($slug);   
 
-        $detail = true;
+        $content = 'pageMissionDetail';
         // render la page 
-        $this->render('index.php', ['mission' => $mission, 'detail' => $detail]);
+        $this->render('index.php', ['mission' => $mission, 'content' => $content]);
         
     }
 }

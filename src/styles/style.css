@@ -38,3 +38,7 @@ a {
 .DEBUG  {
     background-color: white;
 }
+
+.form-text {
+    color: blue;
+}

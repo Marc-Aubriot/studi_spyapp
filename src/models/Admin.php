@@ -40,7 +40,7 @@ class Admin
         $conn = null;
     }
 
-    // Fonction pour récupérer les informations de l'Administrateur' dans la base de données en utilisant son code d'identification
+    // Fonction pour récupérer les informations de l'Administrateur' dans la base de données en utilisant son id
     public static function getAdminById($admin_id) {
         // Connexion à la base de données
         $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -57,15 +57,48 @@ class Admin
         // Récupération du résultat sous forme d'objet Administrateur
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result) {
+            $conn = null;
             return new Admin($result['ID'], $result['nom'], $result['prénom'], $result['adresse_email'], $result['mot_de_passe'], $result['date_création']);
         } else {
+            $conn = null;
             return null;
         }
-
-        // Cloture la connexion
-        $conn = null;
     }
     
+    // Fonction pour récupérer les informations de l'Administrateur' dans la base de données en utilisant son adressse email
+    public static function checkAdmin($admin_mail, $admin_password) {
+        // set les variables
+        $admin = null;
+
+        // on commence par récuperer l'admin via son mail
+        $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $stmt = $conn->prepare('SELECT * FROM administrateur WHERE adresse_email = :adresse_email');
+        $stmt->bindValue(':adresse_email', $admin_mail);
+        $stmt->execute();
+
+        // Récupération du résultat sous forme d'objet Administrateur ou pas d'administrateur correspondant à ce mail
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $admin = new Admin($result['ID'], $result['nom'], $result['prénom'], $result['adresse_email'], $result['mot_de_passe'], $result['date_création']);
+        } else {
+            $admin = null;
+            $message = 'ECHEC-MAIL';
+            return [$admin, $message];
+        }
+
+        // on compare le password de l'admin créer avec le password fourni
+        $admin_true_pass = $admin->getMotDePasse();
+
+        if ( $admin_true_pass === $admin_password ) {
+            $message = 'SUCCESS';
+            return [$admin, $message];
+        } else {
+            $admin = null;
+            $message = 'ECHEC-PASS';
+            return [$admin, $message];
+        }
+    }
+
     // Fonction pour mettre à jour un champ d'Admin dans la base de données
     public function updateChamp($champ, $nouvelleValeur) {
         $db = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);

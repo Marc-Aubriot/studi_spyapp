@@ -31,6 +31,12 @@ switch ($request) {
         $controller->index($slug);
         break;
 
+    case '/public/connexion' :
+        require ROOT . '/src/controllers/ConnexionPageController.php';
+        $controller = new ConnexionPageController();
+        $controller->index();
+        break;
+
     case '/public/about' :
         //require ROOT . '/src/views/about.php';
         break;

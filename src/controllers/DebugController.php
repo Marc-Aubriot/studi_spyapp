@@ -40,6 +40,27 @@ if (MISSIONCONTROLLER) {
     echo '<br>';
 }
 
+// controllers/ConnexionPageController.php
+if (CONNEXIONPAGECONTROLLER) { 
+    echo '<br>';
+    echo 'controllers/ConnexionPageController.php fonctionne';
+    echo '<br>';
+}
+
+// controllers/ConnexionController.php
+if (CONNEXIONCONTROLLER) { 
+    echo '<br>';
+    echo 'controllers/ConnexionController.php fonctionne';
+    echo '<br>';
+}
+
+// controllers/BackofficeController.php
+if (BACKOFFICECONTROLLER) { 
+    echo '<br>';
+    echo 'controllers/BackofficeController.php fonctionne';
+    echo '<br>';
+}
+
 // intilisation la connection PDO à la DB
 try {
     $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
