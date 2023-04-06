@@ -30,10 +30,22 @@ switch ($request) {
         $controller = new MissionController();
         $controller->index($slug);
         break;
-
+        
     case '/public/connexion' :
         require ROOT . '/src/controllers/ConnexionPageController.php';
         $controller = new ConnexionPageController();
+        $controller->index();
+        break;
+
+    case '/public/check' :
+        require ROOT . '/src/controllers/ConnexionController.php';
+        $controller = new ConnexionController();
+        $controller->index();
+        break;
+
+    case '/public/backoffice' :
+        require ROOT . '/src/controllers/BackofficeController.php';
+        $controller = new BackofficeController();
         $controller->index();
         break;
 

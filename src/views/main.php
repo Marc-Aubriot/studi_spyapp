@@ -1,6 +1,6 @@
 <main class="row pt-5">
 
-    <div class="col-12">
+    <div class="col-12 msgAccueil">
         <h2>Bienvenue camarade</h2>
     </div>
    

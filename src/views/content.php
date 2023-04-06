@@ -6,6 +6,8 @@
         include_once ROOT.'/src/views/missionDetail.php';
     } else if ( $content === 'pageConnexion' ) {
         include_once ROOT.'/src/views/connexion.php';
+    } else if ( $content === 'pageCheckPass' ) {
+        include_once ROOT.'/src/views/checkpass.php';
     } else if ( $content === 'pageBackoffice' ) {
         include_once ROOT.'/src/views/backoffice.php';
     }

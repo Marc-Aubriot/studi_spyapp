@@ -8,33 +8,31 @@ class ConnexionController extends Controller {
 
     public function index()
     {
-        if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
-            // on récupère l'email et le mot de passe du formulaire et on appelle la methode de l'objet Admin pour check l'Admin
-            $form_email = $_POST['email'];
-            $form_password = $_POST['password'];
-            $user = Admin::checkAdmin($form_email, $form_password);
-            echo 'test2';
+        // on récupère l'email et le mot de passe du formulaire et on appelle la methode de l'objet Admin pour check l'Admin
+        $form_email = $_POST['email'];
+        $form_password = $_POST['password'];
+        $user = Admin::checkAdmin($form_email, $form_password);
 
-            // on check le tableau renvoyé par la méthode Admin qui se trouve dans $user
-            if ($user[1] !== 'ECHEC-MAIL' ||$user[1] !== 'ECHEC-PASS') {
+        // on check le tableau renvoyé par la méthode Admin qui se trouve dans $user
+        if ($user[1] !== 'ECHEC-MAIL' && $user[1] !== 'ECHEC-PASS') {
 
-                //on bind l'objet Admin qui se trouve dans user[0] à la variable $admin
-                $admin = $user[0];
+            //on bind l'objet Admin qui se trouve dans user[0] à la variable $admin
+            $admin = $user[0];
 
-                // render la page 
-                $content = 'pageBackoffice';
-                $this->render('index.php', ['content' => $content]);
-            } else {
+            // render la page
+            $content = 'pageCheckPass';
+            $this->render('index.php', ['content' => $content]);
+        } else {
 
-                // on bind le message d'erreur et on le renvoit
-                $message = $user[1];
+            // on bind le message d'erreur et on le renvoit
+            $message = $user[1];
 
-                // render la page 
-                $content = 'pageConnexion';
-                $this->render('index.php', ['content' => $content, 'message' => $message]);
-            } 
+            // render la page 
+            $content = 'pageConnexion';
+            $this->render('index.php', ['content' => $content, 'message' => $message]);
+        } 
             
-        }
+        
 
         
     }

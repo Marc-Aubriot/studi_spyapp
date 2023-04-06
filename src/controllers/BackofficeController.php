@@ -2,7 +2,7 @@
 
 if (DEBUG) { define('BACKOFFICECONTROLLER', true); }
 
-class IndexController extends Controller {
+class BackofficeController extends Controller {
 
     public function index() {
 
