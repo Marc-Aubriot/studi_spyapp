@@ -2,22 +2,20 @@
 
 class BackofficeController extends Controller {
 
-    public function index() {
+    public function index($token) {
 
-        // Connexion à la base de données
-        $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // check le token et user admin
+        $valid_token = $this->checkToken($token);
+        $user_admin = $this->checkUser();
+        if (!$valid_token || !$user_admin ) {
+            $this->redirectToRoute('/connexion');
+        }
 
-        // Préparation de la requête
-        $stmt = $conn->prepare('SELECT * FROM mission');
 
-        // Exécution de la requête
-        $stmt->execute();
+        $agents = $this->getList('agent');
 
-        $message = 'test';
-        $user_is_connected = true;
-        $missions = $stmt->fetchAll();    
         // render la page 
-        $this->render('backoffice.php', ['missions' => $missions, 'user_is_connected' => $user_is_connected, 'message' => $message]);
+        $this->render('backoffice.php', ['agents' => $agents]);
     }
 }
 

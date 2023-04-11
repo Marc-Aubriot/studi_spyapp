@@ -15,19 +15,27 @@
 
 <body class="container">
 
-    <?php include_once(ROOT.'/src/views/components/header.php'); ?>
+    <?php 
+        if ($nav) { include_once(ROOT.'/src/views/components/header.php'); }
+    ?>
 
     <main class="row pt-5">
 
-        <div class="col-12 msgAccueil">
-            <h2>Bienvenue camarade</h2>
-        </div>
+        <?php 
+            if ($title)  { 
+                echo '<div class="col-12 msgAccueil">';
+                echo '<h2>Bienvenue camarade</h2>';
+                echo '  </div>';
+            }
+        ?>
     
         <?= $content ?>
 
     </main>
     
-    <?php include_once(ROOT.'/src/views/components/footer.php'); ?>
+    <?php 
+        if ($footer)  { include_once(ROOT.'/src/views/components/footer.php'); }
+    ?>
     
 
     <!-- JAVASCRIPT -->

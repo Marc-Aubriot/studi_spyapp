@@ -14,14 +14,14 @@
 
             </div>
 
-            <?php if(!$user_is_connected && $content !== 'pageConnexion') {
+            <?php if(!$_SESSION["user_admin"]) {
                 echo '<div class="col-1">';
                     echo '<a href="'.URLDUSITE.'public/connexion">connexion</a>';
                 echo '</div>';
             }
             ?>
 
-            <?php if($user_is_connected) {
+            <?php if($_SESSION["user_admin"]) {
                 echo '<div class="col-1">';
                     echo '<a href="'.URLDUSITE.'public/deconnexion">déconnexion</a>';
                 echo '</div>';
@@ -29,7 +29,7 @@
             ?>
 
             <div class="col-1">
-                <a href="<?= URLDUSITE.'public' ?>">retour</a>
+                <a href="<?= URLDUSITE.'public/mission' ?>">retour</a>
             </div>
         </div>
         

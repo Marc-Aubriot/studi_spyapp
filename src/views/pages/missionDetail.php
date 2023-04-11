@@ -31,6 +31,9 @@
 </ul>
 
 <?php 
+    $nav = true;
+    $title = true;
+    $footer = true;
     $content = ob_get_clean();
     include ROOT.'/src/views/defaultpage.php'
 ?>

@@ -22,23 +22,26 @@ class ConnexionController extends Controller {
         // on check le tableau renvoyé par la méthode Admin qui se trouve dans $user
         if ($user[1] !== 'ECHEC-MAIL' && $user[1] !== 'ECHEC-PASS') {
 
-            //on bind l'objet Admin qui se trouve dans user[0] à la variable $admin
+            // on bind l'objet Admin qui se trouve dans user[0] à la variable $admin
             $admin = $user[0];
 
-            $this->redirectToRoute('/backoffice');
+            // set la session de l'user comme admin et lui donne un token
+            $_SESSION["user_admin"] = true;
+            $token = $_SESSION["user_token"] = 'iamtoken';
+
+            $this->redirectToRoute('/backoffice', ['token' => $token]);
         } else {
 
             // on bind le message d'erreur et on le renvoit
             $message = $user[1];
-
-            // render la page 
-            $user_is_connected = false;
-            $this->render('connexion.php', ['message' => $message, 'user_is_connected' => $user_is_connected]);
+            $this->render('connexion.php', ['message' => $message]);
         }   
     }
 
     public function deconnexion()
     {
+        $_SESSION["user_admin"] = false;
+        $_SESSION["user_token"] = null;
         $this->redirectToRoute('/', []);
     }
 }

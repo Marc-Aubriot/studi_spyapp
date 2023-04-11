@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 // load les fichiers importants
 require __DIR__ . '/../config.php';
 require ROOT . '/src/controllers/Controller.php';
@@ -17,12 +19,18 @@ $slug = $slug[count($slug)-1];
 switch ($request) {
 
     case '/public' :
-        require ROOT . '/src/controllers/MissionListController.php';
-        $controller = new MissionListController();
+        require ROOT . '/src/controllers/AccueilController.php';
+        $controller = new AccueilController();
         $controller->index();
         break;
 
     case '/public/' :
+        require ROOT . '/src/controllers/AccueilController.php';
+        $controller = new AccueilController();
+        $controller->index();
+        break;
+
+    case '/public/mission' :
         require ROOT . '/src/controllers/MissionListController.php';
         $controller = new MissionListController();
         $controller->index();
@@ -52,10 +60,10 @@ switch ($request) {
         $controller->connexion();
         break;
 
-    case '/public/backoffice' :
+    case '/public/backoffice/'.$slug :
         require ROOT . '/src/controllers/BackofficeController.php';
         $controller = new BackofficeController();
-        $controller->index();
+        $controller->index($slug);
         break;
 
 
