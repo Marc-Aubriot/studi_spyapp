@@ -1,7 +1,5 @@
 <?php
 
-if (DEBUG) { define('BACKOFFICECONTROLLER', true); }
-
 class BackofficeController extends Controller {
 
     public function index() {
@@ -17,10 +15,8 @@ class BackofficeController extends Controller {
 
         $user_is_connected = true;
         $missions = $stmt->fetchAll();    
-        $content = 'pageBackoffice';
         // render la page 
-        $this->render('index.php', ['missions' => $missions, 'content' => $content, 'user_is_connected' => $user_is_connected]);
-
+        $this->render('backoffice.php', ['missions' => $missions, 'user_is_connected' => $user_is_connected]);
     }
 }
 

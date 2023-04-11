@@ -1,3 +1,7 @@
+<?php 
+    ob_start(); 
+?>
+
 <ul>
     <li>Nom de code - <?= $mission->getNomDeCode() ?></li>
     <br>
@@ -25,3 +29,8 @@
     <br>
     <li>Date fin de mission - <?= $mission->getDateFin() ?></li>
 </ul>
+
+<?php 
+    $content = ob_get_clean();
+    include ROOT.'/src/views/defaultpage.php'
+?>

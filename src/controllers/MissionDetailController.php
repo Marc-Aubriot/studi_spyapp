@@ -1,9 +1,8 @@
 <?php
 
 include_once ROOT . '/src/models/Mission.php';
-if (DEBUG) { define('MISSIONCONTROLLER', true); }
 
-class MissionController extends Controller {
+class MissionDetailController extends Controller {
 
     public function index($slug) {
 
@@ -12,9 +11,8 @@ class MissionController extends Controller {
 
         $message = null;
         $user_is_connected = false;
-        $content = 'pageMissionDetail';
         // render la page 
-        $this->render('index.php', ['mission' => $mission, 'content' => $content, 'message' => $message, 'user_is_connected' => $user_is_connected]);
+        $this->render('missionDetail.php', ['mission' => $mission, 'message' => $message, 'user_is_connected' => $user_is_connected]);
         
     }
 }

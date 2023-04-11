@@ -1,9 +1,8 @@
 <?php
 
 include_once ROOT . '/src/models/Mission.php';
-if (DEBUG) { define('INDEXCONTROLLER', true); }
 
-class IndexController extends Controller {
+class DefaultPageController extends Controller {
 
     public function index() {
 
@@ -17,11 +16,10 @@ class IndexController extends Controller {
         $stmt->execute();
 
         $missions = $stmt->fetchAll();    
-        $content = 'pageMissionListe';
         $user_is_connected = false;
         $message = null;
         // render la page 
-        $this->render('index.php', ['missions' => $missions, 'content' => $content, 'message' => $message, 'user_is_connected' => $user_is_connected]);
+        $this->render('missionList.php', ['missions' => $missions, 'message' => $message, 'user_is_connected' => $user_is_connected]);
 
     }
 }

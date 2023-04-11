@@ -1,3 +1,7 @@
+<?php 
+    ob_start(); 
+?>
+
 <ul>
 
     <?php foreach($missions as $mission): ?>
@@ -12,4 +16,9 @@
             
     <?php endforeach ?>
 
- </ul>
+</ul>
+
+<?php 
+    $content = ob_get_clean();
+    include ROOT.'/src/views/defaultpage.php'
+?>

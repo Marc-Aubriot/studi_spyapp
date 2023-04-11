@@ -4,9 +4,6 @@
 require __DIR__ . '/../config.php';
 require ROOT . '/src/controllers/Controller.php';
 
-// constante pour le mode débug
-if (DEBUG) { define('ENTRYPOINT', true); }
-
 // prend l'uri
 $request = $_SERVER['REQUEST_URI'];
 
@@ -20,20 +17,20 @@ $slug = $slug[count($slug)-1];
 switch ($request) {
 
     case '/public' :
-        require ROOT . '/src/controllers/IndexController.php';
-        $controller = new IndexController();
+        require ROOT . '/src/controllers/DefaultPageController.php';
+        $controller = new DefaultPageController();
         $controller->index();
         break;
 
     case '/public/mission/'.$slug :
-        require ROOT . '/src/controllers/MissionController.php';
-        $controller = new MissionController();
+        require ROOT . '/src/controllers/MissionDetailController.php';
+        $controller = new MissionDetailController();
         $controller->index($slug);
         break;
         
     case '/public/connexion' :
-        require ROOT . '/src/controllers/ConnexionPageController.php';
-        $controller = new ConnexionPageController();
+        require ROOT . '/src/controllers/ConnexionController.php';
+        $controller = new ConnexionController();
         $controller->index();
         break;
 
@@ -44,8 +41,8 @@ switch ($request) {
         break;
 
     case '/public/check' :
-        require ROOT . '/src/controllers/ConnexionController.php';
-        $controller = new ConnexionController();
+        require ROOT . '/src/controllers/CheckCredentialsController.php';
+        $controller = new CheckCredentialsController();
         $controller->index();
         break;
 
@@ -55,13 +52,10 @@ switch ($request) {
         $controller->index();
         break;
 
-    case '/public/about' :
-        //require ROOT . '/src/views/about.php';
-        break;
 
     default:
         http_response_code(404);
-        require ROOT . '/src/views/404.php';
+        require ROOT . '/src/views/components/404.php';
         break;
 }
 

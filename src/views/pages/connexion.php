@@ -1,3 +1,7 @@
+<?php 
+    ob_start(); 
+?>
+
 <form method="post" action="<?= URLDUSITE.'public/check' ?>" class="container col-10">
 
     <div class="row">
@@ -22,3 +26,8 @@
     ?>
 
 </form>
+
+<?php 
+    $content = ob_get_clean();
+    include ROOT.'/src/views/defaultpage.php'
+?>

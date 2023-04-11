@@ -1,12 +1,3 @@
-<?php
-    if (DEBUG) { define('INDEXVIEW', true); }
-    if (DEBUG) { 
-        echo "<div class='DEBUG'>";
-        include_once ROOT . '/src/controllers/DebugController.php';
-        echo "</div>";
-    } 
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,9 +15,20 @@
 
 <body class="container">
 
-    <?php include_once(ROOT.'/src/views/header.php'); ?>
-    <?php include_once(ROOT.'/src/views/main.php'); ?>
-    <?php include_once(ROOT.'/src/views/footer.php'); ?>
+    <?php include_once(ROOT.'/src/views/components/header.php'); ?>
+
+    <main class="row pt-5">
+
+        <div class="col-12 msgAccueil">
+            <h2>Bienvenue camarade</h2>
+        </div>
+    
+        <?= $content ?>
+
+    </main>
+    
+    <?php include_once(ROOT.'/src/views/components/footer.php'); ?>
+    
 
     <!-- JAVASCRIPT -->
     <script src="../src/scripts/main.js"></script>
