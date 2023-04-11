@@ -9,12 +9,25 @@
         </div>
         
         <div class="row">
+
             <div class="col-10">
 
             </div>
-            <div class="col-1">
-                <a href="<?= URLDUSITE.'public/connexion' ?>">connexion</a>
-            </div>
+
+            <?php if(!$user_is_connected && $content !== 'pageConnexion') {
+                echo '<div class="col-1">';
+                    echo '<a href="'.URLDUSITE.'public/connexion">connexion</a>';
+                echo '</div>';
+            }
+            ?>
+
+            <?php if($user_is_connected) {
+                echo '<div class="col-1">';
+                    echo '<a href="'.URLDUSITE.'public/deconnexion">déconnexion</a>';
+                echo '</div>';
+            }
+            ?>
+
             <div class="col-1">
                 <a href="<?= URLDUSITE.'public' ?>">retour</a>
             </div>

@@ -14,4 +14,11 @@
         <input class="col-2" type="submit" value="Submit" name="submit">
     </div>
 
+    <?php if ($message) {
+        echo '<div class="pt-2">';
+            echo '<p class="errorMessage">ERROR : '.$message. '</p>';
+        echo '</div>';
+    }
+    ?>
+
 </form>

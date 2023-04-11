@@ -65,3 +65,7 @@ input[type=submit]:hover {
 .msgAccueil {
     height: 5vh;
 }
+
+.errorMessage {
+    color: red;
+}

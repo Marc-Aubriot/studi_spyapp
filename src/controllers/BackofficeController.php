@@ -15,10 +15,11 @@ class BackofficeController extends Controller {
         // Exécution de la requête
         $stmt->execute();
 
+        $user_is_connected = true;
         $missions = $stmt->fetchAll();    
         $content = 'pageBackoffice';
         // render la page 
-        $this->render('index.php', ['missions' => $missions, 'content' => $content]);
+        $this->render('index.php', ['missions' => $missions, 'content' => $content, 'user_is_connected' => $user_is_connected]);
 
     }
 }

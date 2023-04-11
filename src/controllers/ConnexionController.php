@@ -18,18 +18,21 @@ class ConnexionController extends Controller {
 
             //on bind l'objet Admin qui se trouve dans user[0] à la variable $admin
             $admin = $user[0];
-
+            $message = null;
+            
             // render la page
+            $user_is_connected = false;
             $content = 'pageCheckPass';
-            $this->render('index.php', ['content' => $content]);
+            $this->render('index.php', ['content' => $content, 'message' => $message, 'user_is_connected' => $user_is_connected]);
         } else {
 
             // on bind le message d'erreur et on le renvoit
             $message = $user[1];
 
             // render la page 
+            $user_is_connected = false;
             $content = 'pageConnexion';
-            $this->render('index.php', ['content' => $content, 'message' => $message]);
+            $this->render('index.php', ['content' => $content, 'message' => $message, 'user_is_connected' => $user_is_connected]);
         } 
             
         

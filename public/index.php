@@ -37,6 +37,12 @@ switch ($request) {
         $controller->index();
         break;
 
+    case '/public/deconnexion' :
+        require ROOT . '/src/controllers/DeconnexionController.php';
+        $controller = new DeconnexionController();
+        $controller->index();
+        break;
+
     case '/public/check' :
         require ROOT . '/src/controllers/ConnexionController.php';
         $controller = new ConnexionController();

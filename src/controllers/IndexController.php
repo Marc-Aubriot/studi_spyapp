@@ -18,8 +18,10 @@ class IndexController extends Controller {
 
         $missions = $stmt->fetchAll();    
         $content = 'pageMissionListe';
+        $user_is_connected = false;
+        $message = null;
         // render la page 
-        $this->render('index.php', ['missions' => $missions, 'content' => $content]);
+        $this->render('index.php', ['missions' => $missions, 'content' => $content, 'message' => $message, 'user_is_connected' => $user_is_connected]);
 
     }
 }
