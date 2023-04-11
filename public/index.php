@@ -17,8 +17,14 @@ $slug = $slug[count($slug)-1];
 switch ($request) {
 
     case '/public' :
-        require ROOT . '/src/controllers/DefaultPageController.php';
-        $controller = new DefaultPageController();
+        require ROOT . '/src/controllers/MissionListController.php';
+        $controller = new MissionListController();
+        $controller->index();
+        break;
+
+    case '/public/' :
+        require ROOT . '/src/controllers/MissionListController.php';
+        $controller = new MissionListController();
         $controller->index();
         break;
 
@@ -35,15 +41,15 @@ switch ($request) {
         break;
 
     case '/public/deconnexion' :
-        require ROOT . '/src/controllers/DeconnexionController.php';
-        $controller = new DeconnexionController();
-        $controller->index();
+        require ROOT . '/src/controllers/ConnexionController.php';
+        $controller = new ConnexionController();
+        $controller->deconnexion();
         break;
 
     case '/public/check' :
-        require ROOT . '/src/controllers/CheckCredentialsController.php';
-        $controller = new CheckCredentialsController();
-        $controller->index();
+        require ROOT . '/src/controllers/ConnexionController.php';
+        $controller = new ConnexionController();
+        $controller->connexion();
         break;
 
     case '/public/backoffice' :

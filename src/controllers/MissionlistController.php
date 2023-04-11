@@ -2,7 +2,7 @@
 
 include_once ROOT . '/src/models/Mission.php';
 
-class DefaultPageController extends Controller {
+class MissionListController extends Controller {
 
     public function index() {
 

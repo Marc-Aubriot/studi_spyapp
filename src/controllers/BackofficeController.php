@@ -13,10 +13,11 @@ class BackofficeController extends Controller {
         // Exécution de la requête
         $stmt->execute();
 
+        $message = 'test';
         $user_is_connected = true;
         $missions = $stmt->fetchAll();    
         // render la page 
-        $this->render('backoffice.php', ['missions' => $missions, 'user_is_connected' => $user_is_connected]);
+        $this->render('backoffice.php', ['missions' => $missions, 'user_is_connected' => $user_is_connected, 'message' => $message]);
     }
 }
 
