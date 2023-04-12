@@ -129,6 +129,18 @@ switch ($request) {
         $controller->formhandler($slug5,$slug4,$slug2,$slug1);
     break;
 
+    // BACKOFFICE : ADMIN LISTE
+    case '/public/backoffice/'.$slug2.'/admins' :
+        require ROOT . '/src/controllers/BackofficeAdminsListController.php';
+        $controller = new BackofficeAdminsListController();
+        $controller->index($slug2);
+    break;
+
+    case '/public/backoffice/'.$slug5.'/admins/formhandler/'.$slug2.'/'.$slug1 :
+        require ROOT . '/src/controllers/BackofficeAdminsListController.php';
+        $controller = new BackofficeAdminsListController();
+        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+    break;
 
     // 404
     default:

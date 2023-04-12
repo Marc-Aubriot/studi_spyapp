@@ -9,32 +9,33 @@ class Admin
     private $mot_de_passe;
     private $date_creation;
     
-    public function __construct($id, $nom, $prenom, $adresse_email, $mot_de_passe, $date_creation)
+    public function __construct($id, $nom, $prenom, $adresse_email, $mot_de_passe)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->adresse_email = $adresse_email;
         $this->mot_de_passe = $mot_de_passe;
-        $this->date_creation = $date_creation;
+        //$this->date_creation = $date_creation;
     }
 
     // Fonction pour ajouter un nouvel Admin en base de données
-    private function addAdminToDatabase() {
+    public function addAdminToDatabase() {
         // Connexion à la base de données
         $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         // Préparation de la requête
-        $stmt = $conn->prepare('INSERT INTO administrateur (ID, nom, prénom, adresse_email, mot_de_passe) VALUES (:id, :nom, :prénom, :adresse_email, :mot_de_passe)');
+        $stmt = $conn->prepare('INSERT INTO administrateur (ID, nom, prénom, adresse_email, mot_de_passe)
+        VALUES (:id, :val1, :val2, :val3, :val4)');
 
-        // Attribution des valeurs aux paramètres de la requête
-        $stmt->bindValue(':id', $this->id);
-        $stmt->bindValue(':nom', $this->nom);
-        $stmt->bindValue(':prénom', $this->prenom);
-        $stmt->bindValue(':adresse_email', $this->adresse_email);
-        $stmt->bindValue(':mot_de_passe', $this->mot_de_passe);
         // Exécution de la requête
-        $stmt->execute();
+        $stmt->execute(
+            array(':id' => $this->id, 
+            ':val1' => $this->nom, 
+            ':val2' => $this->prenom, 
+            ':val3' => $this->adresse_email, 
+            ':val4' => $this->mot_de_passe, 
+        ));
 
         // Cloture la connexion
         $conn = null;
