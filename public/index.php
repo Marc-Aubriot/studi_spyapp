@@ -142,6 +142,19 @@ switch ($request) {
         $controller->formhandler($slug5,$slug4,$slug2,$slug1);
     break;
 
+    // BACKOFFICE : MISSIONS LISTE
+    case '/public/backoffice/'.$slug2.'/missions' :
+        require ROOT . '/src/controllers/BackofficeMissionsListController.php';
+        $controller = new BackofficeMissionsListController();
+        $controller->index($slug2);
+    break;
+
+    case '/public/backoffice/'.$slug5.'/missions/formhandler/'.$slug2.'/'.$slug1 :
+        require ROOT . '/src/controllers/BackofficeMissionsListController.php';
+        $controller = new BackofficeMissionsListController();
+        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+    break;
+
     // 404
     default:
         http_response_code(404);
