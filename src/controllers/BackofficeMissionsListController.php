@@ -31,32 +31,42 @@ class BackofficeMissionsListController extends Controller {
 
         $message = null;
 
-        if ($entity === 'cibles' && $form_action === "update") {
-            $cible = Cible::getCibleById($_POST["id"]);
-            $cible->updateChamp('code_identification', $_POST["code"]);
-            $cible->updateChamp('nom', $_POST["nom"]);
-            $cible->updateChamp('prénom', $_POST["prénom"]);
-            $cible->updateChamp('date_de_naissance', $_POST["date"]);
-            $cible->updateChamp('nationalité', $_POST["nat"]);
+        if ($entity === 'missions' && $form_action === "update") {
+            $mission = Mission::getMissionById($_POST["id"]);
+            $mission->updateChamp('nom_de_code', $_POST["code"]);
+            $mission->updateChamp('titre', $_POST["title"]);
+            $mission->updateChamp('description_de_mission', $_POST["desc"]);
+            $mission->updateChamp('pays', $_POST["pays"]);
+            $mission->updateChamp('agents', $_POST["agents"]);
+            $mission->updateChamp('contacts', $_POST["contacts"]);
+            $mission->updateChamp('cibles', $_POST["cibles"]);
+            $mission->updateChamp('type_de_mission', $_POST["type"]);
+            $mission->updateChamp('statut', $_POST["statut"]);
+            $mission->updateChamp('planques', $_POST["planques"]);
+            $mission->updateChamp('spécialités', $_POST["spé"]);
+            $mission->updateChamp('date_début', $_POST["debut"]);
+            $mission->updateChamp('date_fin', $_POST["fin"]);
 
-            $message = 'Modification réussie : CIBLE '.$cible->getCodeIdentification().' => '.$_POST["code"];
+            $message = 'Modification réussie : MISSION '.$mission->getNomDeCode().' => '.$_POST["code"];
 
-        } else if ($entity === 'cibles' && $form_action === "delete") {
-            $cible = Cible::getCibleById($_POST["id"]);
-            $cible->delete();
+        } else if ($entity === 'missions' && $form_action === "delete") {
+            $mission = Mission::getMissionById($_POST["id"]);
+            $mission->delete();
 
-            $message = 'Eradication réussie : CIBLE '.$cible->getCodeIdentification(). ' => supprimée';
+            $message = 'Eradication réussie : MISSION '.$mission->getNomDeCode(). ' => supprimée';
 
-        } else if ($entity === 'cibles' && $form_action === "create") {
-            $cible = new Cible($_POST["code"], $_POST["nom"], $_POST["prénom"], $_POST["date"], $_POST["nat"]);
-            $cible->addCibleToDatabase();
+        } else if ($entity === 'missions' && $form_action === "create") {
+            $mission = new Mission($_POST["code"], $_POST["title"], $_POST["desc"], $_POST["pays"], $_POST["agents"], 
+            $_POST["contacts"], $_POST["cibles"], $_POST["type"], $_POST["statut"], $_POST["planques"], 
+            $_POST["spé"], $_POST["debut"], $_POST["fin"]);
+            $mission->addMissionToDatabase();
 
-            $message = 'Création réussie : CIBLE '.$_POST["code"].' => ajoutée à la base de données';
+            $message = 'Création réussie : MISSION '.$_POST["code"].' => ajoutée à la base de données';
         }
 
          // re render la liste mise à jour
-         $cibles = $this->getList('cible');
-         $this->render('backofficeCiblesList.php', ['cibles' => $cibles, 'token' => $token, 'message' => $message]);
+         $missions = $this->getList('mission');
+         $this->render('backofficeMissionsList.php', ['missions' => $missions, 'token' => $token, 'message' => $message]);
     }
 }
 

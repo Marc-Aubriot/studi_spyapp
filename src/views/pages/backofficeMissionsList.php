@@ -97,21 +97,45 @@
         </tr>
 
         <tr>
-            <form method="post" action="<?= URLDUSITE.'public/backoffice/'.$token.'/cibles/formhandler/create/' ?>">
+            <form method="post" action="<?= URLDUSITE.'public/backoffice/'.$token.'/missions/formhandler/create/' ?>">
             <td>
-                <input type="text" name="code" placeholder="code"></input> 
+                <input type="text" name="code" placeholder="nom de code"></input> 
             </td>
             <td> 
-                <input type="text" name="nom" placeholder="nom"></input> 
+                <input type="text" name="title" placeholder="titre"></input> 
             </td>
             <td> 
-                <input type="text" name="prénom" placeholder="prénom"></input>
+                <input type="text" name="desc" placeholder="description"></input>
             </td>
             <td> 
-                <input type="text" name="date"placeholder="year-month-day"></input> 
+                <input type="text" name="pays"placeholder="pays 'FRA'"></input> 
             </td>
             <td> 
-                <input type="text" name="nat" placeholder="nationalité 'FRA'"></input> 
+                <input type="text" name="agents" placeholder="codes agents"></input> 
+            </td>
+            <td> 
+                <input type="text" name="contacts" placeholder="codes contacts"></input> 
+            </td>
+            <td> 
+                <input type="text" name="cibles" placeholder="codes cibles"></input> 
+            </td>
+            <td> 
+                <input type="text" name="type" placeholder="infiltration..."></input> 
+            </td>
+            <td> 
+                <input type="text" name="statut" placeholder="en cours"></input> 
+            </td>
+            <td> 
+                <input type="text" name="planques" placeholder="code planques"></input> 
+            </td>
+            <td> 
+                <input type="text" name="spé" placeholder="spécialités"></input> 
+            </td>
+            <td> 
+                <input type="text" name="debut" placeholder="début year-month-day"></input> 
+            </td>
+            <td> 
+                <input type="text" name="fin" placeholder="fin year-month-day"></input> 
             </td>
             <td>
                 <input type="submit" value="Ajouter" name="action"></input> 
