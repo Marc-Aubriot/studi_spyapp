@@ -16,20 +16,21 @@ class Planque
     }
 
     // Fonction pour ajouter un nouvelle Planque en base de données
-    private function addPlanqueToDatabase() {
+    public function addPlanqueToDatabase() {
         // Connexion à la base de données
         $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         // Préparation de la requête
-        $stmt = $conn->prepare('INSERT INTO planque (code_identification, adresse, pays, type_de_mission) VALUES (:code_identification, :adresse, :pays, :type_de_mission)');
+        $stmt = $conn->prepare('INSERT INTO planque (code_identification, adresse, pays, type_de_mission)
+        VALUES (:id, :val1, :val2, :val3)');
 
-        // Attribution des valeurs aux paramètres de la requête
-        $stmt->bindValue(':code_identification', $this->code_identification);
-        $stmt->bindValue(':adresse', $this->adresse);
-        $stmt->bindValue(':pays', $this->pays);
-        $stmt->bindValue(':type_de_mission', $this->type_de_mission);
         // Exécution de la requête
-        $stmt->execute();
+        $stmt->execute(
+            array(':id' => $this->code_identification, 
+            ':val1' => $this->adresse, 
+            ':val2' => $this->pays, 
+            ':val3' => $this->type_de_mission, 
+        ));
 
         // Cloture la connexion
         $conn = null;

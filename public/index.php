@@ -116,6 +116,19 @@ switch ($request) {
         $controller->formhandler($slug5,$slug4,$slug2,$slug1);
     break;
 
+    // BACKOFFICE : PLANQUES LISTE
+    case '/public/backoffice/'.$slug2.'/planques' :
+        require ROOT . '/src/controllers/BackofficePlanquesListController.php';
+        $controller = new BackofficePlanquesListController();
+        $controller->index($slug2);
+    break;
+
+    case '/public/backoffice/'.$slug5.'/planques/formhandler/'.$slug2.'/'.$slug1 :
+        require ROOT . '/src/controllers/BackofficePlanquesListController.php';
+        $controller = new BackofficePlanquesListController();
+        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+    break;
+
 
     // 404
     default:
