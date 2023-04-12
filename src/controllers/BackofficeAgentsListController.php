@@ -1,6 +1,6 @@
 <?php
 
-class BackofficeController extends Controller {
+class BackofficeAgentsListController extends Controller {
 
     public function index($token) {
 
@@ -13,9 +13,9 @@ class BackofficeController extends Controller {
 
 
         $agents = $this->getList('agent');
-
+        $message = null;
         // render la page 
-        $this->render('backoffice.php', ['agents' => $agents, 'token' => $token]);
+        $this->render('backofficeAgentsList.php', ['agents' => $agents, 'token' => $token, 'message' => $message]);
     }
 }
 

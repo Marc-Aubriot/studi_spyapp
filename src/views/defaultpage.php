@@ -22,6 +22,10 @@
     <main class="row pt-5">
 
         <?php 
+            if ($_SESSION["user_admin"]) {  include_once(ROOT.'/src/views/components/backofficeheader.php'); }
+        ?>
+
+        <?php 
             if ($title)  { 
                 echo '<div class="col-12 msgAccueil">';
                 echo '<h2>Bienvenue camarade</h2>';

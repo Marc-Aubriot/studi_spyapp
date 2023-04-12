@@ -13,7 +13,15 @@ $request = $_SERVER['REQUEST_URI'];
 $slug = explode("/", $request);
 
 // récupère le dernier segment
-$slug = $slug[count($slug)-1];
+$slug1 = $slug[count($slug)-1];
+// récupère l'avant dernier segment
+$slug2 = $slug[count($slug)-2];
+// récupère l'avant avant dernier segment
+$slug3 = $slug[count($slug)-3];
+// récupère l'avant avant avant dernier segment
+$slug4 = $slug[count($slug)-4];
+// récupère l'avant avant avant dernier segment
+$slug5 = $slug[count($slug)-5];
 
 // public cest le répertoire d'entrée, à modifier en fonction de l'hébergeur avec htaccess
 switch ($request) {
@@ -36,10 +44,10 @@ switch ($request) {
         $controller->index();
         break;
 
-    case '/public/mission/'.$slug :
+    case '/public/mission/'.$slug1 :
         require ROOT . '/src/controllers/MissionDetailController.php';
         $controller = new MissionDetailController();
-        $controller->index($slug);
+        $controller->index($slug1);
         break;
         
     case '/public/connexion' :
@@ -60,10 +68,22 @@ switch ($request) {
         $controller->connexion();
         break;
 
-    case '/public/backoffice/'.$slug :
+    case '/public/backoffice/'.$slug1 :
         require ROOT . '/src/controllers/BackofficeController.php';
         $controller = new BackofficeController();
-        $controller->index($slug);
+        $controller->index($slug1);
+        break;
+
+    case '/public/backoffice/'.$slug2.'/agents' :
+        require ROOT . '/src/controllers/BackofficeAgentsListController.php';
+        $controller = new BackofficeAgentsListController();
+        $controller->index($slug2);
+        break;
+
+    case '/public/backoffice/'.$slug5.'/'.$slug4.'/formhandler/'.$slug2.'/'.$slug1 :
+        require ROOT . '/src/controllers/FormHandlerController.php';
+        $controller = new FormHandlerController();
+        $controller->index($slug5,$slug4,$slug2,$slug1);
         break;
 
 

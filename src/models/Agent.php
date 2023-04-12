@@ -20,22 +20,23 @@ class Agent
     }
 
     // Fonction pour ajouter un nouvel agent en base de données
-    private function addAgentToDatabase() {
+    public function addAgentToDatabase() {
         // Connexion à la base de données
         $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         // Préparation de la requête
-        $stmt = $conn->prepare('INSERT INTO agent (code_identification, nom, prénom, date_de_naissance, nationalite) VALUES (:code_identification, :nom, :prénom, :date_de_naissance, :nationalité, :spécialités)');
+        $stmt = $conn->prepare('INSERT INTO agent (code_identification, nom, prénom, date_de_naissance, nationalité, spécialités) 
+        VALUES (:id, :val1, :val2, :val3, :val4, :val5)');
 
-        // Attribution des valeurs aux paramètres de la requête
-        $stmt->bindValue(':code_identification', $this->code_identification);
-        $stmt->bindValue(':nom', $this->nom);
-        $stmt->bindValue(':prénom', $this->prenom);
-        $stmt->bindValue(':date_de_naissance', $this->date_de_naissance);
-        $stmt->bindValue(':nationalité', $this->nationalite);
-        $stmt->bindValue(':spécialités', $this->specialite);
         // Exécution de la requête
-        $stmt->execute();
+        $stmt->execute(
+            array(':id' => $this->code_identification, 
+            ':val1' => $this->nom, 
+            ':val2' => $this->prenom, 
+            ':val3' => $this->date_de_naissance, 
+            ':val4' => $this->nationalite, 
+            ':val5' => $this->specialite
+        ));
 
         // Cloture la connexion
         $conn = null;

@@ -69,3 +69,24 @@ input[type=submit]:hover {
 .errorMessage {
     color: red;
 }
+
+/* TABLEAU */
+
+table, tr, td {
+    color: rgb(25, 214, 25);
+}
+
+.rowView {
+    height: 10vh;
+}
+
+.blink_me {
+    animation: blinker 1s linear;
+    animation-iteration-count: 3;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

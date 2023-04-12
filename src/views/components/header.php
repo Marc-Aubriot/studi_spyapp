@@ -28,9 +28,20 @@
             }
             ?>
 
-            <div class="col-1">
-                <a href="<?= URLDUSITE.'public/mission' ?>">retour</a>
-            </div>
+            <?php if(!$_SESSION["user_admin"]) {
+                echo '<div class="col-1">';
+                    echo '<a href="'.URLDUSITE.'public/mission">retour</a>';
+                echo '</div>';
+            }
+            ?>
+
+            <?php if($_SESSION["user_admin"]) {
+                echo '<div class="col-1">';
+                    echo '<a href="'.URLDUSITE.'public/backoffice/'.$_SESSION["user_token"].'">retour</a>';
+                echo '</div>';
+            }
+            ?>
+
         </div>
         
     </nav>

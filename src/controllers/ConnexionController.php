@@ -27,7 +27,7 @@ class ConnexionController extends Controller {
 
             // set la session de l'user comme admin et lui donne un token
             $_SESSION["user_admin"] = true;
-            $token = $_SESSION["user_token"] = 'iamtoken';
+            $token = $_SESSION["user_token"] = $this->guidv4();
 
             $this->redirectToRoute('/backoffice', ['token' => $token]);
         } else {
