@@ -18,21 +18,22 @@ class Cible
     }
 
     // Fonction pour ajouter un nouvelle Cible en base de données
-    private function addCibleToDatabase() {
+    public function addCibleToDatabase() {
         // Connexion à la base de données
         $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         // Préparation de la requête
-        $stmt = $conn->prepare('INSERT INTO cible (code_identification, nom, prénom, date_de_naissance, nationalite) VALUES (:code_identification, :nom, :prénom, :date_de_naissance, :nationalité)');
+        $stmt = $conn->prepare('INSERT INTO cible (code_identification, nom, prénom, date_de_naissance, nationalité)
+        VALUES (:id, :val1, :val2, :val3, :val4)');
 
-        // Attribution des valeurs aux paramètres de la requête
-        $stmt->bindValue(':code_identification', $this->code_identification);
-        $stmt->bindValue(':nom', $this->nom);
-        $stmt->bindValue(':prénom', $this->prenom);
-        $stmt->bindValue(':date_de_naissance', $this->date_de_naissance);
-        $stmt->bindValue(':nationalité', $this->nationalite);
         // Exécution de la requête
-        $stmt->execute();
+        $stmt->execute(
+            array(':id' => $this->code_identification, 
+            ':val1' => $this->nom, 
+            ':val2' => $this->prenom, 
+            ':val3' => $this->date_de_naissance, 
+            ':val4' => $this->nationalite, 
+        ));
 
         // Cloture la connexion
         $conn = null;

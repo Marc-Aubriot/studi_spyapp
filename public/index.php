@@ -38,6 +38,7 @@ switch ($request) {
         $controller->index();
     break;
 
+    // FRONTOFFICE : MISSIONS LISTE
     case '/public/mission' :
         require ROOT . '/src/controllers/MissionListController.php';
         $controller = new MissionListController();
@@ -50,6 +51,7 @@ switch ($request) {
         $controller->index($slug1);
     break;
         
+    // CONNEXION /DECONNEXION /CHECK CREDENTIALS 
     case '/public/connexion' :
         require ROOT . '/src/controllers/ConnexionController.php';
         $controller = new ConnexionController();
@@ -68,12 +70,14 @@ switch ($request) {
         $controller->connexion();
     break;
 
+    // BACKOFFICE
     case '/public/backoffice/'.$slug1 :
         require ROOT . '/src/controllers/BackofficeController.php';
         $controller = new BackofficeController();
         $controller->index($slug1);
     break;
 
+    // BACKOFFICE : AGENTS LISTE
     case '/public/backoffice/'.$slug2.'/agents' :
         require ROOT . '/src/controllers/BackofficeAgentsListController.php';
         $controller = new BackofficeAgentsListController();
@@ -86,6 +90,7 @@ switch ($request) {
         $controller->formhandler($slug5,$slug4,$slug2,$slug1);
     break;
 
+    // BACKOFFICE : CONTACTS LISTE
     case '/public/backoffice/'.$slug2.'/contacts' :
         require ROOT . '/src/controllers/BackofficeContactsListController.php';
         $controller = new BackofficeContactsListController();
@@ -98,6 +103,21 @@ switch ($request) {
         $controller->formhandler($slug5,$slug4,$slug2,$slug1);
     break;
 
+    // BACKOFFICE : CIBLES LISTE
+    case '/public/backoffice/'.$slug2.'/cibles' :
+        require ROOT . '/src/controllers/BackofficeCiblesListController.php';
+        $controller = new BackofficeCiblesListController();
+        $controller->index($slug2);
+    break;
+
+    case '/public/backoffice/'.$slug5.'/cibles/formhandler/'.$slug2.'/'.$slug1 :
+        require ROOT . '/src/controllers/BackofficeCiblesListController.php';
+        $controller = new BackofficeCiblesListController();
+        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+    break;
+
+
+    // 404
     default:
         http_response_code(404);
         require ROOT . '/src/views/components/404.php';
