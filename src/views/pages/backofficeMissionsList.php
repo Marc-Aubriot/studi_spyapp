@@ -2,18 +2,23 @@
   ob_start();
 ?>
 
-<h2 class="blink_me"><?= $message ?></h2>
+<h2 class="blink_me"><span id="txtHint"></span><?= $message ?></h2>
 
 <div class="tableContainer">
     <table class="mb-5 me-2">
 
         <thead>
             <tr>
-                <th>Toutes les MISSIONS</th>
+                <th>Rechercher une mission</th>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="text" placeholder="nom de code" onkeyup="searchBar(this.value)">
+                </th>
             </tr>
         </thead>
 
-        <tbody>
+        <tbody id="mission-table">
             <tr>
                 <td>Nom de code</td>
                 <td>Titre</td>
@@ -94,7 +99,7 @@
 
         <tfoot>
             <tr>
-                <td>AJOUTER UNE MISSION</td>
+                <td>ajouter mission : quick bar</td>
             </tr>
 
             <tr>
@@ -112,13 +117,13 @@
                     <input type="text" name="pays"placeholder="pays 'FRA'"></input> 
                 </td>
                 <td> 
-                    <input type="text" name="agents" placeholder="codes agents"></input> 
+                    <input type="text" name="agents" placeholder="codes agents" onkeyup="showHint(this.value,'agent')"></input> 
                 </td>
                 <td> 
-                    <input type="text" name="contacts" placeholder="codes contacts"></input> 
+                    <input type="text" name="contacts" placeholder="codes contacts" onkeyup="showHint(this.value,'contact')"></input> 
                 </td>
                 <td> 
-                    <input type="text" name="cibles" placeholder="codes cibles"></input> 
+                    <input type="text" name="cibles" placeholder="codes cibles" onkeyup="showHint(this.value,'cible')"></input> 
                 </td>
                 <td> 
                     <input type="text" name="type" placeholder="infiltration..."></input> 
@@ -127,7 +132,7 @@
                     <input type="text" name="statut" placeholder="en cours"></input> 
                 </td>
                 <td> 
-                    <input type="text" name="planques" placeholder="code planques"></input> 
+                    <input type="text" name="planques" placeholder="code planques" onkeyup="showHint(this.value,'planque')"></input> 
                 </td>
                 <td> 
                     <input type="text" name="spé" placeholder="spécialités"></input> 
@@ -142,6 +147,12 @@
                     <input type="submit" value="Ajouter" name="action"></input> 
                 </td>
                 </form>   
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button  onclick="newMission()">Créer une mission, step by step</button>
+                </td>
             </tr>
         </tfoot>
 

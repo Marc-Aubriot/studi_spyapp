@@ -15,20 +15,23 @@
 
 <body class="container">
 
-    <?php 
-        if ($nav) { include_once(ROOT.'/src/views/components/header.php'); }
-        if ($_SESSION["user_admin"]) {  include_once(ROOT.'/src/views/components/backofficeheader.php'); }
-        if ($title)  { 
-            echo '<div class="col-12 msgAccueil">';
-            echo '<h2>Bienvenue camarade</h2>';
-            echo '  </div>';
-        }
-        echo $content;
-        if ($footer)  { include_once(ROOT.'/src/views/components/footer.php'); }
-    ?>
+    <main id="main">
+        <?php 
+            if ($nav) { include_once(ROOT.'/src/views/components/header.php'); }
+            if ($_SESSION["user_admin"]) {  include_once(ROOT.'/src/views/components/backofficeheader.php'); }
+            if ($title)  { 
+                echo '<div class="col-12 msgAccueil">';
+                echo '<h2>Bienvenue camarade</h2>';
+                echo '  </div>';
+            }
+            echo $content;
+        ?>
+    </main>
 
+    <?php if ($footer)  { include_once(ROOT.'/src/views/components/footer.php'); }?>
+    
     <!-- JAVASCRIPT -->
-    <script src="../src/scripts/main.js"></script>
+    <script src="<?= URLDUSITE ?>/src/scripts/main.js"></script>
 </body>
 
 </html>

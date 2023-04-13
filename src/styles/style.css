@@ -13,15 +13,16 @@ body {
 }
 
 header {
-    height: 5%;
+    height: 5vh;
 }
 
 main {
-    height: 89%;
+    height: 94vh;
 }
 
 footer {
-    height: 2%;
+    height: 2vh;
+    position: sticky;
 }
 
 b, .text {
@@ -62,6 +63,17 @@ input[type=submit]:hover {
     background-color: rgb(25, 214, 25);
 }
 
+button {
+    color: rgb(25, 214, 25);
+    border: 4px solid rgb(25, 214, 25);
+    background-color: blue;
+}
+button:hover {
+    color: blue;
+    border: 4px solid blue;
+    background-color: rgb(25, 214, 25);
+}
+
 .msgAccueil {
     height: 5vh;
 }
@@ -71,9 +83,7 @@ input[type=submit]:hover {
 }
 
 /* TABLEAU */
-
 .tableContainer {
-    overflow-y: scroll;
     overflow-x: auto;
 }
 
@@ -99,4 +109,42 @@ table, tr, td {
 
 .backofficeHeader {
     height: 5vh;
+}
+
+/* MODAL */
+.modalBox {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    overflow-y: auto;
+}
+
+.closeBtn {
+    position: relative;
+    top: 3%;
+    left: 95%;
+}
+
+.messageBox {
+    color: black;
+    /*position: relative;
+    top: 5%; 
+    left: 8%;*/
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.inputBox {
+    /*position: relative;
+    top: 6%;
+    left: 8%;*/
+    margin-left: 20px;
+}
+
+.nextBtn {
+    margin-left: 20px;
 }
