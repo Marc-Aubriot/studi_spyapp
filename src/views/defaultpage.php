@@ -17,30 +17,15 @@
 
     <?php 
         if ($nav) { include_once(ROOT.'/src/views/components/header.php'); }
-    ?>
-
-    <main class="row pt-5">
-
-        <?php 
-            if ($_SESSION["user_admin"]) {  include_once(ROOT.'/src/views/components/backofficeheader.php'); }
-        ?>
-
-        <?php 
-            if ($title)  { 
-                echo '<div class="col-12 msgAccueil">';
-                echo '<h2>Bienvenue camarade</h2>';
-                echo '  </div>';
-            }
-        ?>
-    
-        <?= $content ?>
-
-    </main>
-    
-    <?php 
+        if ($_SESSION["user_admin"]) {  include_once(ROOT.'/src/views/components/backofficeheader.php'); }
+        if ($title)  { 
+            echo '<div class="col-12 msgAccueil">';
+            echo '<h2>Bienvenue camarade</h2>';
+            echo '  </div>';
+        }
+        echo $content;
         if ($footer)  { include_once(ROOT.'/src/views/components/footer.php'); }
     ?>
-    
 
     <!-- JAVASCRIPT -->
     <script src="../src/scripts/main.js"></script>

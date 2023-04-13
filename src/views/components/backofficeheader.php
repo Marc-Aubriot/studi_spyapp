@@ -1,4 +1,4 @@
-<div class="mb-4 container d-flex">
+<div class="mb-4 container d-flex backofficeHeader">
 
     <div class="col-12 row">
 

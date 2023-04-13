@@ -10,18 +10,7 @@ require ROOT . '/src/controllers/Controller.php';
 $request = $_SERVER['REQUEST_URI'];
 
 // explose l'uri en segment
-$slug = explode("/", $request);
-
-// récupère le dernier segment
-$slug1 = $slug[count($slug)-1];
-// récupère l'avant dernier segment
-$slug2 = $slug[count($slug)-2];
-// récupère l'avant avant dernier segment
-$slug3 = $slug[count($slug)-3];
-// récupère l'avant avant avant dernier segment
-$slug4 = $slug[count($slug)-4];
-// récupère l'avant avant avant dernier segment
-$slug5 = $slug[count($slug)-5];
+$slugs = explode("/", $request);
 
 // public cest le répertoire d'entrée, à modifier en fonction de l'hébergeur avec htaccess
 switch ($request) {
@@ -45,10 +34,10 @@ switch ($request) {
         $controller->index();
     break;
 
-    case '/public/mission/'.$slug1 :
+    case '/public/mission/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/MissionDetailController.php';
         $controller = new MissionDetailController();
-        $controller->index($slug1);
+        $controller->index($slugs[count($slugs)-1]);
     break;
         
     // CONNEXION /DECONNEXION /CHECK CREDENTIALS 
@@ -71,88 +60,88 @@ switch ($request) {
     break;
 
     // BACKOFFICE
-    case '/public/backoffice/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeController.php';
         $controller = new BackofficeController();
-        $controller->index($slug1);
+        $controller->index($slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : AGENTS LISTE
-    case '/public/backoffice/'.$slug2.'/agents' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/agents' :
         require ROOT . '/src/controllers/BackofficeAgentsListController.php';
         $controller = new BackofficeAgentsListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/agents/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/agents/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeAgentsListController.php';
         $controller = new BackofficeAgentsListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : CONTACTS LISTE
-    case '/public/backoffice/'.$slug2.'/contacts' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/contacts' :
         require ROOT . '/src/controllers/BackofficeContactsListController.php';
         $controller = new BackofficeContactsListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/contacts/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/contacts/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeContactsListController.php';
         $controller = new BackofficeContactsListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : CIBLES LISTE
-    case '/public/backoffice/'.$slug2.'/cibles' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/cibles' :
         require ROOT . '/src/controllers/BackofficeCiblesListController.php';
         $controller = new BackofficeCiblesListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/cibles/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/cibles/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeCiblesListController.php';
         $controller = new BackofficeCiblesListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : PLANQUES LISTE
-    case '/public/backoffice/'.$slug2.'/planques' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/planques' :
         require ROOT . '/src/controllers/BackofficePlanquesListController.php';
         $controller = new BackofficePlanquesListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/planques/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/planques/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficePlanquesListController.php';
         $controller = new BackofficePlanquesListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : ADMIN LISTE
-    case '/public/backoffice/'.$slug2.'/admins' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/admins' :
         require ROOT . '/src/controllers/BackofficeAdminsListController.php';
         $controller = new BackofficeAdminsListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/admins/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/admins/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeAdminsListController.php';
         $controller = new BackofficeAdminsListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // BACKOFFICE : MISSIONS LISTE
-    case '/public/backoffice/'.$slug2.'/missions' :
+    case '/public/backoffice/'.$slugs[count($slugs)-2].'/missions' :
         require ROOT . '/src/controllers/BackofficeMissionsListController.php';
         $controller = new BackofficeMissionsListController();
-        $controller->index($slug2);
+        $controller->index($slugs[count($slugs)-2]);
     break;
 
-    case '/public/backoffice/'.$slug5.'/missions/formhandler/'.$slug2.'/'.$slug1 :
+    case '/public/backoffice/'.$slugs[count($slugs)-5].'/missions/formhandler/'.$slugs[count($slugs)-2].'/'.$slugs[count($slugs)-1] :
         require ROOT . '/src/controllers/BackofficeMissionsListController.php';
         $controller = new BackofficeMissionsListController();
-        $controller->formhandler($slug5,$slug4,$slug2,$slug1);
+        $controller->formhandler($slugs[count($slugs)-5],$slugs[count($slugs)-4],$slugs[count($slugs)-2],$slugs[count($slugs)-1]);
     break;
 
     // 404
