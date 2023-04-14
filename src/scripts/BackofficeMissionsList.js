@@ -43,7 +43,7 @@ function newMission(reponses, phase) {
 
 };
 
-// pop le modal
+// pop le modal d'opération de newMission()
 function popModal() {
     // container modal
     const main = document.getElementById('main');
@@ -63,7 +63,7 @@ function popModal() {
     
 };
 
-// passe à la phase suivante du modal
+// passe à la phase suivante de newMission()
 function nextPhase(str, phase, strArray) {
 
     if (phase < 13) {
@@ -106,7 +106,7 @@ function nextPhase(str, phase, strArray) {
 
 };
 
-// envoie la requête au serveur
+// envoie la requête au serveur à la fin de l'éxecution de newMission()
 function sendMissionToServeur(strArray) {
     
     const table = document.getElementById('mission-table');
@@ -127,7 +127,7 @@ function sendMissionToServeur(strArray) {
     messageToLog(message);
 }
 
-// pop les zones d'instructions et d'input
+// pop les zones d'instructions et d'input de newMission()
 function popInstruction(instructionText, placeholderText, phase, strArray) {
     const div = document.getElementById('contentBox');
 
@@ -176,7 +176,7 @@ function popInstruction(instructionText, placeholderText, phase, strArray) {
     div.appendChild(nextBtn);
 };
 
-// créer une table avec les infos du serveur
+// créer une table avec les infos renvoyées par le serveur pour newMission()
 function getTable(strArray) {
     const div = document.getElementById('table-zone');
 
@@ -190,7 +190,7 @@ function getTable(strArray) {
     xmlhttp.send();
 }
 
-// affiche message actione et log
+// affiche message actione et log dans la view de la liste des missions
 function messageToLog(messageText, pText) {
     if (pText === undefined || pText === null ) {
         pText = messageText;
@@ -204,4 +204,84 @@ function messageToLog(messageText, pText) {
     p.classList = 'blink_me';
     p.textContent = `${pText}`;
     log.appendChild(p);
+}
+
+// delete la mission selectionnée dans la view de la liste des missions
+function delMission(btnID) {
+    const tr = document.getElementById(`tr-mission-${btnID}`);
+  
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        //div.innerHTML = this.responseText;
+        let message = `Eradication réussie : MISSION ${btnID} => supprimée`;
+        messageToLog(message);
+        tr.remove();
+      };
+    };
+    xmlhttp.open("GET",  `../../../src/service/delmission.php?q=` + btnID, true);
+    xmlhttp.send();
+  
+    
+};
+
+// barre de recherche basique dans la view de la liste des missions
+function searchBar(str) {
+    if (str.length == 0) {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    } else {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("txtHint").innerHTML = this.responseText;
+        };
+      };
+      xmlhttp.open("GET",  "../../../src/service/searchbar.php?q=" + str, true);
+      xmlhttp.send();
+    };
+};
+
+// fonction de recherche basique dans les champs d'input dans la view de la liste des missions
+function showHint(str,table) {
+    if (str.length == 0) {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    } else {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("txtHint").innerHTML = this.responseText;
+        }
+      };
+      xmlhttp.open("GET",  `../../../src/service/gethint-${table}.php?q=` + str, true);
+      xmlhttp.send();
+    }
+}
+
+// update la mission selectionnée dans la view de la liste des missions
+function updateMission(btnID) {
+    let datas = [];
+    const code = document.getElementById(`input-13-${btnID}`).value;
+
+    for ( i=0; i<=12; i++) {
+        var value = document.getElementById(`input-${i}-${btnID}`).value;
+        datas[i] = value;
+    };
+
+    datas.push(code);
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //const message = document.getElementById('blink');
+            //message.innerHTML = this.responseText;
+        };
+    };
+    xmlhttp.open("GET",  `../../../src/service/update-mission.php?q=` + datas , true);
+    xmlhttp.send();
+
+    let message = `Modification réussie : Mission ${datas[0]} => modifiée`;
+    messageToLog(message);
+
 }

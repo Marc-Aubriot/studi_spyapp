@@ -1,17 +1,6 @@
-function delMission(btnID) {
-  const tr = document.getElementById(`tr-mission-${btnID}`);
-
-  let xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      //div.innerHTML = this.responseText;
-      let message = `Eradication réussie : MISSION ${btnID} => supprimée`;
-      messageToLog(message);
-      tr.remove();
-    };
-  };
-  xmlhttp.open("GET",  `../../../src/service/delmission.php?q=` + btnID, true);
-  xmlhttp.send();
-
-  
-};
+// UUID
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}

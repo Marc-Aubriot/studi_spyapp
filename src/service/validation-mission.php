@@ -2,6 +2,7 @@
 session_start();
 require __DIR__ . '/../../config.php';
 include_once ROOT.'/src/models/Mission.php';
+include_once ROOT.'/src/service/randomstring.php';
 
 $q = $_REQUEST["q"];
 $q = explode(',', $q);
@@ -12,51 +13,54 @@ $mission = new Mission($q[0], $q[1], $q[2], $q[3], $q[6], $q[8], $q[7], $q[4], $
 $mission->addMissionToDatabase();
 
 $id = strval($mission->getNomDeCode());
+$uuid = generateRandomString(6);
+
+
 echo '
 <tr id="tr-mission-'.$mission->getNomDeCode().'">
     
         <td>
-            <input type="text" name="code" value="'.$mission->getNomDeCode().'"></input> 
+            <input type="text" name="code" value="'.$mission->getNomDeCode().'"  id="input-0-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="title" value="'.$mission->getTitre().'"></input> 
+            <input type="text" name="title" value="'.$mission->getTitre().'"  id="input-1-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="desc" value="'.$mission->getDescriptionDeMission().'"></input>
+            <input type="text" name="desc" value="'.$mission->getDescriptionDeMission().'"  id="input-2-'.$uuid.'"></input>
         </td>
         <td> 
-            <input type="text" name="pays"value="'.$mission->getPays().'"></input> 
+            <input type="text" name="pays"value="'.$mission->getPays().'"  id="input-3-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="agents" value="'.$mission->getAgents().'"></input> 
+            <input type="text" name="agents" value="'.$mission->getAgents().'"  id="input-4-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="contacts" value="'.$mission->getContacts().'"></input> 
+            <input type="text" name="contacts" value="'.$mission->getContacts().'"  id="input-5-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="cibles" value="'.$mission->getCibles().'"></input> 
+            <input type="text" name="cibles" value="'.$mission->getCibles().'"  id="input-6-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="type" value="'.$mission->getTypeDeMission().'"></input> 
+            <input type="text" name="type" value="'.$mission->getTypeDeMission().'"  id="input-7-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="statut" value="'.$mission->getStatut().'"></input> 
+            <input type="text" name="statut" value="'.$mission->getStatut().'"  id="input-8-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="planques" value="'.$mission->getPlanques().'"></input> 
+            <input type="text" name="planques" value="'.$mission->getPlanques().'"  id="input-9-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="spé" value="'.$mission->getSpecialites().'"></input> 
+            <input type="text" name="spé" value="'.$mission->getSpecialites().'"  id="input-10-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="debut" value="'.$mission->getDateDebut().'"></input> 
+            <input type="text" name="debut" value="'.$mission->getDateDebut().'"  id="input-11-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="fin" value="'.$mission->getDateFin().'"></input> 
+            <input type="text" name="fin" value="'.$mission->getDateFin().'"  id="input-12-'.$uuid.'"></input> 
         </td>
         <td>
-            <input type="submit" value="Modifier" name="action"></input> 
-            <input type="hidden" value="'.$mission->getNomDeCode().'" name="id"></input> 
+            <input type="text" name="fin" value="'.$mission->getNomDeCode().'" id="input-13-'.$uuid.'" hidden></input> 
+            <button onclick="updateMission(this.id)" id="'. $uuid.'">Modifier</button>
         </td>
     
 

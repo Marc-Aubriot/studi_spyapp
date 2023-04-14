@@ -35,52 +35,53 @@
                 <td>Date de fin</td>
             </tr>
         
+            <?php $iteration = 0; ?>
             <?php foreach($missions as $mission): ?>
 
                 <tr id="tr-mission-<?= $mission['nom_de_code'] ?>">
                     
                     <td>
-                        <input type="text" name="code" value="<?= $mission['nom_de_code'] ?>"></input> 
+                        <input type="text" name="code" value="<?= $mission['nom_de_code'] ?>" id="<?= 'input-0-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="title" value="<?= $mission['titre'] ?>"></input> 
+                        <input type="text" name="title" value="<?= $mission['titre'] ?>" id="<?= 'input-1-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="desc" value="<?= $mission['description_de_mission'] ?>"></input>
+                        <input type="text" name="desc" value="<?= $mission['description_de_mission'] ?>" id="<?= 'input-2-'.$iteration ?>"></input>
                     </td>
                     <td> 
-                        <input type="text" name="pays"value="<?= $mission['pays'] ?>"></input> 
+                        <input type="text" name="pays"value="<?= $mission['pays'] ?>" id="<?= 'input-3-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="agents" value="<?= $mission['agents'] ?>"></input> 
+                        <input type="text" name="agents" value="<?= $mission['agents'] ?>" id="<?= 'input-4-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="contacts" value="<?= $mission['contacts'] ?>"></input> 
+                        <input type="text" name="contacts" value="<?= $mission['contacts'] ?>" id="<?= 'input-5-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="cibles" value="<?= $mission['cibles'] ?>"></input> 
+                        <input type="text" name="cibles" value="<?= $mission['cibles'] ?>" id="<?= 'input-6-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="type" value="<?= $mission['type_de_mission'] ?>"></input> 
+                        <input type="text" name="type" value="<?= $mission['type_de_mission'] ?>" id="<?= 'input-7-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="statut" value="<?= $mission['statut'] ?>"></input> 
+                        <input type="text" name="statut" value="<?= $mission['statut'] ?>" id="<?= 'input-8-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="planques" value="<?= $mission['planques'] ?>"></input> 
+                        <input type="text" name="planques" value="<?= $mission['planques'] ?>" id="<?= 'input-9-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="spé" value="<?= $mission['spécialités'] ?>"></input> 
+                        <input type="text" name="spé" value="<?= $mission['spécialités'] ?>"  id="<?= 'input-10-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="debut" value="<?= $mission['date_début'] ?>"></input> 
+                        <input type="text" name="debut" value="<?= $mission['date_début'] ?>" id="<?= 'input-11-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="fin" value="<?= $mission['date_fin'] ?>"></input> 
+                        <input type="text" name="fin" value="<?= $mission['date_fin'] ?>" id="<?= 'input-12-'.$iteration ?>"></input> 
                     </td>
                     <td>
-                        <input type="submit" value="Modifier" name="action"></input> 
-                        <input type="hidden" value="<?= $mission['nom_de_code'] ?>" name="id"></input> 
+                        <input type="text" name="fin" value="<?= $mission['nom_de_code'] ?>" id="<?= 'input-13-'.$iteration ?>" hidden></input> 
+                        <button onclick="updateMission('<?= $iteration ?>')">Modifier</button>
                     </td>
                     
 
@@ -90,61 +91,12 @@
                     
                 </tr>
 
+                <?php $iteration++; ?>
             <?php endforeach ?>
 
         </tbody>
 
         <tfoot id="trtest">
-            <tr>
-                <td>ajouter mission : quick bar</td>
-            </tr>
-
-            <tr>
-                
-                <td>
-                    <input type="text" name="code" placeholder="nom de code"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="title" placeholder="titre"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="desc" placeholder="description"></input>
-                </td>
-                <td> 
-                    <input type="text" name="pays"placeholder="pays 'FRA'"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="agents" placeholder="codes agents" onkeyup="showHint(this.value,'agent')"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="contacts" placeholder="codes contacts" onkeyup="showHint(this.value,'contact')"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="cibles" placeholder="codes cibles" onkeyup="showHint(this.value,'cible')"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="type" placeholder="infiltration..."></input> 
-                </td>
-                <td> 
-                    <input type="text" name="statut" placeholder="en cours"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="planques" placeholder="code planques" onkeyup="showHint(this.value,'planque')"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="spé" placeholder="spécialités"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="debut" placeholder="début year-month-day"></input> 
-                </td>
-                <td> 
-                    <input type="text" name="fin" placeholder="fin year-month-day"></input> 
-                </td>
-                <td>
-                    <input type="submit" value="Ajouter" name="action"></input> 
-                </td>
-                 
-            </tr>
 
             <tr>
                 <td colspan="2">
