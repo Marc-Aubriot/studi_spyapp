@@ -32,6 +32,10 @@
     
     <!-- JAVASCRIPT -->
     <script src="<?= URLDUSITE ?>/src/scripts/main.js"></script>
+    <script src="<?= URLDUSITE ?>/src/scripts/searchbar.js"></script>
+    <script src="<?= URLDUSITE ?>/src/scripts/showhint.js"></script>
+    <script src="<?= URLDUSITE ?>/src/scripts/uuidv4.js"></script>
+    <script src="<?= URLDUSITE ?>/src/scripts/newmission.js"></script>
 </body>
 
 </html>

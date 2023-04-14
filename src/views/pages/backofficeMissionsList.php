@@ -2,7 +2,7 @@
   ob_start();
 ?>
 
-<h2 class="blink_me"><span id="txtHint"></span><?= $message ?></h2>
+<h2 class="blink_me" id="blink"><span id="txtHint"></span><?= $message ?></h2>
 
 <div class="tableContainer">
     <table class="mb-5 me-2">
@@ -37,8 +37,8 @@
         
             <?php foreach($missions as $mission): ?>
 
-                <tr>
-                    <form method="post" action="<?= URLDUSITE.'public/backoffice/'.$token.'/missions/formhandler/update/' ?>">
+                <tr id="tr-mission-<?= $mission['nom_de_code'] ?>">
+                    
                     <td>
                         <input type="text" name="code" value="<?= $mission['nom_de_code'] ?>"></input> 
                     </td>
@@ -82,13 +82,10 @@
                         <input type="submit" value="Modifier" name="action"></input> 
                         <input type="hidden" value="<?= $mission['nom_de_code'] ?>" name="id"></input> 
                     </td>
-                    </form>
+                    
 
                     <td>
-                        <form method="post" action="<?= URLDUSITE.'public/backoffice/'.$token.'/missions/formhandler/delete/' ?>">
-                            <input type="submit" value="Supprimer" name="action"></input>
-                            <input type="hidden" value="<?= $mission['nom_de_code'] ?>" name="id"></input> 
-                        </form>
+                        <button onclick="delMission('<?= $mission['nom_de_code'] ?>')">Supprimer</button>
                     </td>
                     
                 </tr>
@@ -97,13 +94,13 @@
 
         </tbody>
 
-        <tfoot>
+        <tfoot id="trtest">
             <tr>
                 <td>ajouter mission : quick bar</td>
             </tr>
 
             <tr>
-                <form method="post" action="<?= URLDUSITE.'public/backoffice/'.$token.'/missions/formhandler/create/' ?>">
+                
                 <td>
                     <input type="text" name="code" placeholder="nom de code"></input> 
                 </td>
@@ -146,17 +143,23 @@
                 <td>
                     <input type="submit" value="Ajouter" name="action"></input> 
                 </td>
-                </form>   
+                 
             </tr>
 
             <tr>
                 <td colspan="2">
-                    <button  onclick="newMission()">Créer une mission, step by step</button>
+                    <button onclick="newMission()">Créer une mission, step by step</button>
                 </td>
             </tr>
         </tfoot>
 
     </table>
+
+
+</div>
+
+<div id="logs" class="mt-4 container">
+
 </div>
 
 <?php 
