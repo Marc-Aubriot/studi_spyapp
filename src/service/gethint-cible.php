@@ -7,7 +7,7 @@ $controller = new Controller();
 $listcible = $controller->getList('cible');
 $a = null;
 foreach($listcible as $cible){
-  $a[] = $cible['code_identification']."=> pays: ".$cible['pays'].'.';
+  $a[] = $cible['code_identification']."=> pays: ".$cible['nationalité'].'.';
 }
 
 // get the q parameter from URL

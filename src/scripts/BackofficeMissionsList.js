@@ -22,14 +22,14 @@ function newMission(reponses, phase) {
         'description de mission',
         'FRA',
         'Détruire un pays',
-        'assassinat, infiltration...',
+        'assassinat infiltration...',
         "nom de code de l'agent",
         "nom de code de la cible",
         "nom de code du contact",
         "nom de code de la planque",
-        "date début, year-month-day",
-        "date fin, year-month-day",
-        "en cours, préparation etc...."
+        "date début year-month-day",
+        "date fin year-month-day",
+        "en cours préparation etc...."
     ];
 
     if (phase === undefined || phase === null ) {
@@ -133,23 +133,7 @@ function nextPhase(str, phase, strArray) {
 
 // envoie la requête au serveur à la fin de l'éxecution de newMission()
 function sendMissionToServeur(strArray) {
-    
-    const table = document.getElementById('mission-table');
-    const tr = document.createElement('tr');
-    tr.id = `tr-mission-${strArray[0]}`;
-    table.appendChild(tr);
-
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-        tr.innerHTML = this.responseText;
-        };
-    };
-    xmlhttp.open("GET",  `../../../src/service/validation-mission.php?q=` + strArray , true);
-    xmlhttp.send();
-
-    let message = `Création réussie : Mission ${strArray[0]} => ajoutée`;
-    messageToLog(message);
+    validateDatas2(strArray);
 }
 
 // pop les zones d'instructions et d'input de newMission()
@@ -181,7 +165,7 @@ function popInstruction(instructionText, placeholderText, phase, strArray, onkey
     inputBox.id = `inputBox-${phase}`;
     inputBox.classList = "inputBox";
     inputBox.focus();
-    inputBox.value = `${placeholderText}`;
+    inputBox.placeholder = `${placeholderText}`;
     if (showHintActive) { inputBox.setAttribute('onkeyup', `showHint(this.value, '${onkeyuptable}')`) };
 
     // btn suivant
@@ -301,16 +285,68 @@ function updateMission(btnID) {
         datas[i] = value;
     };
 
-    // vérifie que les informations correspondent aux contraintes, sinon renvoit un message d'erreur
-    let continueOperation = validateDatas(datas);
-    if (continueOperation === 'AGENT INVALIDE') {
-        let message = `Modification échouée : Mission ${datas[0]} => Veuillez vérifier les contraintes opérationnelles, les champs renseignés ne correspondent pas aux contraintes.`;
-        messageToLog(message);
-        return;
-    }
-
     datas.push(code);
 
+    // vérifie que les informations correspondent aux contraintes, sinon renvoit un message d'erreur
+    validateDatas(datas);
+}
+
+// vérifie les contraintes opérationnelles
+function validateDatas(datas) {
+    // on vérifie que l'agent possède une spécialité demandée
+    let response;
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const message = document.getElementById('blink');
+            message.textContent = xmlhttp.responseText;
+            response = xmlhttp.responseText;
+
+            if ( response === 'true' ) {
+                sendUpdate(datas);
+            } else if (response === 'false' ) {
+                let message = `Modification échouée : Mission ${datas[0]} => Veuillez vérifier les contraintes opérationnelles, les champs renseignés ne correspondent pas aux contraintes.`;
+                messageToLog(message);
+                return;
+            } else {
+                console.log('something happened...');
+            }
+        };
+    };
+    xmlhttp.open("GET",  `../../../src/service/validation-datas-update.php?q=` + datas , true);
+    xmlhttp.send();
+}
+
+// vérifie les contraintes opérationnelles
+function validateDatas2(datas) {
+    // on vérifie que l'agent possède une spécialité demandée
+    let response;
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const message = document.getElementById('blink');
+            message.textContent = xmlhttp.responseText;
+            response = xmlhttp.responseText;
+
+            if ( response === 'true' ) {
+                sendMission(datas);
+            } else if (response === 'false' ) {
+                let message = `Création échouée : Mission ${datas[0]} => Veuillez vérifier les contraintes opérationnelles, les champs renseignés ne correspondent pas aux contraintes.`;
+                messageToLog(message);
+                return;
+            } else {
+                console.log('something happened...');
+            }
+        };
+    };
+    xmlhttp.open("GET",  `../../../src/service/validation-datas-create.php?q=` + datas , true);
+    xmlhttp.send();
+}
+
+// send datas to serveur for update after validation 
+function sendUpdate(datas) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() { if (this.readyState == 4 && this.status == 200) {
         const message = document.getElementById('blink');
@@ -321,24 +357,24 @@ function updateMission(btnID) {
 
     let message = `Modification réussie : Mission ${datas[0]} => modifiée`;
     messageToLog(message);
-
 }
 
-// vérifie les contraintes opérationnelles
-function validateDatas(datas) {
-    // on vérifie que l'agent possède une spécialité demandée
-    let agentIsValid = false;
+// send datas to serveur for creation after validation 
+function sendMission(datas) {
+    const table = document.getElementById('mission-table');
+    const tr = document.createElement('tr');
+    tr.id = `tr-mission-${datas[0]}`;
+    table.appendChild(tr);
 
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            const message = document.getElementById('blink');
-            message.textContent = this.response;
-            agentIsValid = this.response;
+        tr.innerHTML = this.responseText;
         };
     };
-    xmlhttp.open("GET",  `../../../src/service/validation-datas-modal.php?q=` + datas[10] +','+ datas[4] +','+ 'update' , true);
+    xmlhttp.open("GET",  `../../../src/service/validation-mission.php?q=` + datas , true);
     xmlhttp.send();
 
-    return agentIsValid;
+    let message = `Création réussie : Mission ${datas[0]} => ajoutée`;
+    messageToLog(message);
 }

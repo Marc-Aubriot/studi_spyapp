@@ -6,7 +6,7 @@ include_once ROOT.'/src/models/Mission.php';
 $q = $_REQUEST["q"];
 $q = explode(',', $q);
 
-$mission = Mission::getMissionById($q[14]);
+$mission = Mission::getMissionById($q[13]);
 if ($mission) {
     $mission->updateChamp('titre', $q[1]);
     $mission->updateChamp('description_de_mission', $q[2]);
@@ -21,5 +21,6 @@ if ($mission) {
     $mission->updateChamp('date_début', $q[11]);
     $mission->updateChamp('date_fin', $q[12]);
     $mission->updateChamp('nom_de_code', $q[0]);
+    if (DEBUG) { echo 'MISSION VALIDE'; };
 }
 ?>

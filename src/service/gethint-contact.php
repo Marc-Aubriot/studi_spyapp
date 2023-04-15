@@ -7,7 +7,7 @@ $controller = new Controller();
 $listcontact = $controller->getList('contact');
 $a = null;
 foreach($listcontact as $contact){
-  $a[] = $contact['code_identification']."=> pays: ".$contact['pays'].'.';
+  $a[] = $contact['code_identification']."=> pays: ".$contact['nationalité'].'.';
 }
 
 // get the q parameter from URL
