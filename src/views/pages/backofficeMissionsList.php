@@ -110,7 +110,7 @@
 
 <h2 class="blink_me mt-2" id="blink"><span id="txtHint"></span><?= $message ?></h2>
 
-<div id="logs" class="mt-2 container">
+<div id="logs" class="mt-5 container">
 
 </div>
 

@@ -1,35 +1,22 @@
 <?php
 require __DIR__ . '/../../config.php';
 include_once ROOT.'/src/models/Agent.php';
-include_once ROOT.'/src/controllers/Controller.php';
-
-$controller = new Controller();
-$listcontact = $controller->getList('contact');
-$a = null;
-foreach($listcontact as $contact){
-  $a[] = $contact['code_identification']."=> pays: ".$contact['pays'].'.';
-}
 
 // get the q parameter from URL
 $q = $_REQUEST["q"];
+$q = explode(',', $q);
 
-$hint = "";
+$agent = Agent::getAgentById($q[1]);
+$spécialités = explode(',', $q[0]);
+$agent_is_valid = false;
 
-// lookup all hints from array if $q is different from ""
-if ($q !== "") {
-  $q = strtolower($q);
-  $len=strlen($q);
-  foreach($a as $name) {
-    if (stristr($q, substr($name, 0, $len))) {
-      if ($hint === "") {
-        $hint = $name;
-      } else {
-        $hint .= "<br> $name";
-      }
+if ($agent) {
+    foreach($spécialités as $spé) {
+        if ($spé === $agent->getSpecialite()) { 
+            return true;
+        } 
     }
-  }
 }
 
-// Output "no suggestion" if no hint was found or output correct values
-echo $hint === "" ? "no suggestion" : $hint;
+return false;
 ?>

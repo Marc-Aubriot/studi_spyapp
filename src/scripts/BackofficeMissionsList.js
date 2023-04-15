@@ -302,8 +302,8 @@ function updateMission(btnID) {
     };
 
     // vérifie que les informations correspondent aux contraintes, sinon renvoit un message d'erreur
-    const continueOperation = validateDatas(datas);
-    if (!continueOperation[0]) {
+    let continueOperation = validateDatas(datas);
+    if (continueOperation === 'AGENT INVALIDE') {
         let message = `Modification échouée : Mission ${datas[0]} => Veuillez vérifier les contraintes opérationnelles, les champs renseignés ne correspondent pas aux contraintes.`;
         messageToLog(message);
         return;
@@ -312,12 +312,10 @@ function updateMission(btnID) {
     datas.push(code);
 
     let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            //const message = document.getElementById('blink');
-            //message.innerHTML = this.responseText;
-        };
-    };
+    xmlhttp.onreadystatechange = function() { if (this.readyState == 4 && this.status == 200) {
+        const message = document.getElementById('blink');
+        message.textContent = this.response;
+    }; };
     xmlhttp.open("GET",  `../../../src/service/update-mission.php?q=` + datas , true);
     xmlhttp.send();
 
@@ -328,21 +326,19 @@ function updateMission(btnID) {
 
 // vérifie les contraintes opérationnelles
 function validateDatas(datas) {
-    
     // on vérifie que l'agent possède une spécialité demandée
+    let agentIsValid = false;
+
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            //const message = document.getElementById('blink');
-            //message.innerHTML = this.responseText;
+            const message = document.getElementById('blink');
+            message.textContent = this.response;
+            agentIsValid = this.response;
         };
     };
-    // payload = spécialité, agent(code), action
-    xmlhttp.open("GET",  `../../../src/service/vadidation-datas-modal.php?q=` + datas[5] + datas[6] + 'spécialités' , true);
+    xmlhttp.open("GET",  `../../../src/service/validation-datas-modal.php?q=` + datas[10] +','+ datas[4] +','+ 'update' , true);
     xmlhttp.send();
 
-    // validation réussie
-    let messageAndData = [];
-    messageAndData[0] = true;
-    return messageAndData;
+    return agentIsValid;
 }

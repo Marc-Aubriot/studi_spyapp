@@ -93,6 +93,21 @@ class Agent
         $db = null;
     }
 
+    // fonction pour avoir une liste des agents qui possèdent les spécialités demandées
+    public function getListSpecialsAgents(string $spé)
+    {
+        // Connexion à la base de données
+        $conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+        // Préparation de la requête
+        $stmt = $conn->prepare('SELECT * FROM agent WHERE spécialités ='.$spé);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     // Méthodes pour racevoir les paramètres de l'Agent
     public function getCodeIdentification()
     {
