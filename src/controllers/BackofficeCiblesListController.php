@@ -10,6 +10,8 @@ class BackofficeCiblesListController extends Controller {
         $valid_token = $this->checkToken($token);
         $user_admin = $this->checkUser();
         if (!$valid_token || !$user_admin ) {
+            $_SESSION["user_admin"] = false;
+            $_SESSION["user_token"] = null;
             $this->redirectToRoute('/connexion');
         }
 
@@ -26,6 +28,8 @@ class BackofficeCiblesListController extends Controller {
         $valid_token = $this->checkToken($token);
         $user_admin = $this->checkUser();
         if (!$valid_token || !$user_admin ) {
+            $_SESSION["user_admin"] = false;
+            $_SESSION["user_token"] = null;
             $this->redirectToRoute('/connexion');
         }
 

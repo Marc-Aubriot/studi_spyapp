@@ -2,8 +2,7 @@
   ob_start();
 ?>
 
-<h1>ACCUEIL PAGE </h1>
-<a href="<?=URLDUSITE.'public/mission'?>">CLICK ME MISSION </a>
+<a href="<?=URLDUSITE.'public/mission'?>" class="spyapp">SPY APP</a>
 
 <?php 
     $nav = false;

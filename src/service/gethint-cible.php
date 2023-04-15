@@ -7,7 +7,7 @@ $controller = new Controller();
 $listcible = $controller->getList('cible');
 $a = null;
 foreach($listcible as $cible){
-  $a[] = $cible['code_identification'];
+  $a[] = $cible['code_identification']."=> pays: ".$cible['pays'].'.';
 }
 
 // get the q parameter from URL
@@ -24,7 +24,7 @@ if ($q !== "") {
       if ($hint === "") {
         $hint = $name;
       } else {
-        $hint .= ", $name";
+        $hint .= "<br> $name";
       }
     }
   }

@@ -7,10 +7,10 @@ function newMission(reponses, phase) {
         'Dans quel pays ?',
         'Choisir le type de mission.',
         'Definir les spécialités nécessaires à son accomplissement.',
-        'Choisir un agent qui possède au moins une spécialité requise.',
-        "Choisir une cible (elle ne peut pas avoir la même nationalité que l'agent choisi).",
-        "Choisir un contact (il doit avoir la même nationalité que le pays de la mission).",
-        "Choisir une planque (elle doit se trouver dans le même pays que la mission).",
+        'Choisir un agent qui (contrainte possède au moins une spécialité requise).',
+        "Choisir une cible (contrainte: elle ne peut pas avoir la même nationalité que l'agent choisi).",
+        "Choisir un contact (contrainte: il doit avoir la même nationalité que le pays de la mission).",
+        "Choisir une planque (contrainte: elle doit se trouver dans le même pays que la mission).",
         "La mission commence quand ?",
         "Elle fini quand ?",
         "Enfin, quel statut pour la mission ?"
@@ -20,7 +20,7 @@ function newMission(reponses, phase) {
         'nom de mission',
         'titre de la mission',
         'description de mission',
-        'pays "FRA"',
+        'FRA',
         'Détruire un pays',
         'assassinat, infiltration...',
         "nom de code de l'agent",
@@ -38,7 +38,32 @@ function newMission(reponses, phase) {
         popModal();
         popInstruction(instructions[phase], placeholderText[phase], phase, reponses);
     } else {
-        popInstruction(instructions[phase], placeholderText[phase], phase, reponses);
+        switch (phase) {
+            case 3 :
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses, 'pays');
+            break;
+
+            case 6 :
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses, 'agent');
+            break;
+
+            case 7 :
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses, 'cible');
+            break;
+
+            case 8 :
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses, 'contact');
+            break;
+
+            case 9 :
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses, 'planque');
+            break;
+
+            default:
+                popInstruction(instructions[phase], placeholderText[phase], phase, reponses);
+            break;
+        }
+        
     };
 
 };
@@ -128,8 +153,13 @@ function sendMissionToServeur(strArray) {
 }
 
 // pop les zones d'instructions et d'input de newMission()
-function popInstruction(instructionText, placeholderText, phase, strArray) {
+function popInstruction(instructionText, placeholderText, phase, strArray, onkeyuptable) {
     const div = document.getElementById('contentBox');
+    let showHintActive = true;
+
+    if (onkeyuptable == undefined || onkeyuptable == null ) {
+        showHintActive = false;
+    }
 
     if ( phase >= 1) {
         const previousMessageBox = document.getElementById(`messageBox-${phase-1}`);
@@ -152,13 +182,14 @@ function popInstruction(instructionText, placeholderText, phase, strArray) {
     inputBox.classList = "inputBox";
     inputBox.focus();
     inputBox.value = `${placeholderText}`;
+    if (showHintActive) { inputBox.setAttribute('onkeyup', `showHint(this.value, '${onkeyuptable}')`) };
 
-     // btn suivant
-     const nextBtn = document.createElement('button');
-     nextBtn.innerHTML = "Suivant";
-     nextBtn.id = `nextBtn-${phase}`;
-     nextBtn.classList = 'nextBtn';
-     nextBtn.addEventListener('click', () => { nextPhase(inputBox.value, phase, strArray); });
+    // btn suivant
+    const nextBtn = document.createElement('button');
+    nextBtn.innerHTML = "Suivant";
+    nextBtn.id = `nextBtn-${phase}`;
+    nextBtn.classList = 'nextBtn';
+    nextBtn.addEventListener('click', () => { nextPhase(inputBox.value, phase, strArray); });
 
     if (phase === 13) {
         const tableZone = document.createElement('div');
@@ -243,7 +274,8 @@ function searchBar(str) {
 };
 
 // fonction de recherche basique dans les champs d'input dans la view de la liste des missions
-function showHint(str,table) {
+function showHint(str, table) {
+
     if (str.length == 0) {
       document.getElementById("txtHint").innerHTML = "";
       return;
@@ -254,7 +286,7 @@ function showHint(str,table) {
           document.getElementById("txtHint").innerHTML = this.responseText;
         }
       };
-      xmlhttp.open("GET",  `../../../src/service/gethint-${table}.php?q=` + str, true);
+      xmlhttp.open("GET",  `../../../src/service/gethint-${table}.php?q=` + str , true);
       xmlhttp.send();
     }
 }
@@ -268,6 +300,14 @@ function updateMission(btnID) {
         var value = document.getElementById(`input-${i}-${btnID}`).value;
         datas[i] = value;
     };
+
+    // vérifie que les informations correspondent aux contraintes, sinon renvoit un message d'erreur
+    const continueOperation = validateDatas(datas);
+    if (!continueOperation[0]) {
+        let message = `Modification échouée : Mission ${datas[0]} => Veuillez vérifier les contraintes opérationnelles, les champs renseignés ne correspondent pas aux contraintes.`;
+        messageToLog(message);
+        return;
+    }
 
     datas.push(code);
 
@@ -284,4 +324,25 @@ function updateMission(btnID) {
     let message = `Modification réussie : Mission ${datas[0]} => modifiée`;
     messageToLog(message);
 
+}
+
+// vérifie les contraintes opérationnelles
+function validateDatas(datas) {
+    
+    // on vérifie que l'agent possède une spécialité demandée
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //const message = document.getElementById('blink');
+            //message.innerHTML = this.responseText;
+        };
+    };
+    // payload = spécialité, agent(code), action
+    xmlhttp.open("GET",  `../../../src/service/vadidation-datas-modal.php?q=` + datas[5] + datas[6] + 'spécialités' , true);
+    xmlhttp.send();
+
+    // validation réussie
+    let messageAndData = [];
+    messageAndData[0] = true;
+    return messageAndData;
 }

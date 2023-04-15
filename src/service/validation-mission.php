@@ -29,16 +29,16 @@ echo '
             <input type="text" name="desc" value="'.$mission->getDescriptionDeMission().'"  id="input-2-'.$uuid.'"></input>
         </td>
         <td> 
-            <input type="text" name="pays"value="'.$mission->getPays().'"  id="input-3-'.$uuid.'"></input> 
+            <input type="text" name="pays"value="'.$mission->getPays().'"  id="input-3-'.$uuid.'" onkeyup="showHint(this.value,"pays")"></input> 
         </td>
         <td> 
-            <input type="text" name="agents" value="'.$mission->getAgents().'"  id="input-4-'.$uuid.'"></input> 
+            <input type="text" name="agents" value="'.$mission->getAgents().'"  id="input-4-'.$uuid.'" onkeyup="showHint(this.value,"agent")"></input> 
         </td>
         <td> 
-            <input type="text" name="contacts" value="'.$mission->getContacts().'"  id="input-5-'.$uuid.'"></input> 
+            <input type="text" name="contacts" value="'.$mission->getContacts().'"  id="input-5-'.$uuid.'" onkeyup="showHint(this.value,"contact")"></input> 
         </td>
         <td> 
-            <input type="text" name="cibles" value="'.$mission->getCibles().'"  id="input-6-'.$uuid.'"></input> 
+            <input type="text" name="cibles" value="'.$mission->getCibles().'"  id="input-6-'.$uuid.'" onkeyup="showHint(this.value,"cible")"></input> 
         </td>
         <td> 
             <input type="text" name="type" value="'.$mission->getTypeDeMission().'"  id="input-7-'.$uuid.'"></input> 
@@ -47,7 +47,7 @@ echo '
             <input type="text" name="statut" value="'.$mission->getStatut().'"  id="input-8-'.$uuid.'"></input> 
         </td>
         <td> 
-            <input type="text" name="planques" value="'.$mission->getPlanques().'"  id="input-9-'.$uuid.'"></input> 
+            <input type="text" name="planques" value="'.$mission->getPlanques().'"  id="input-9-'.$uuid.'" onkeyup="showHint(this.value,"planque")"></input> 
         </td>
         <td> 
             <input type="text" name="spé" value="'.$mission->getSpecialites().'"  id="input-10-'.$uuid.'"></input> 

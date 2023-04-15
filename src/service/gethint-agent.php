@@ -7,7 +7,7 @@ $controller = new Controller();
 $listagent = $controller->getList('agent');
 $a = null;
 foreach($listagent as $agent){
-  $a[] = $agent['code_identification'];
+  $a[] = $agent['code_identification']."=> pays: ".$agent['nationalité'].". spécialité: ".$agent['spécialités'];
 }
 
 // get the q parameter from URL
@@ -24,7 +24,7 @@ if ($q !== "") {
       if ($hint === "") {
         $hint = $name;
       } else {
-        $hint .= ", $name";
+        $hint .= "<br> $name";
       }
     }
   }

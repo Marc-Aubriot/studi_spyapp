@@ -7,7 +7,7 @@ $controller = new Controller();
 $listplanque = $controller->getList('planque');
 $a = null;
 foreach($listplanque as $planque){
-  $a[] = $planque['code_identification'];
+  $a[] = $planque['code_identification']."=>pays: ".$planque['pays'].".";
 }
 
 // get the q parameter from URL
@@ -24,7 +24,7 @@ if ($q !== "") {
       if ($hint === "") {
         $hint = $name;
       } else {
-        $hint .= ", $name";
+        $hint .= "<br> $name";
       }
     }
   }

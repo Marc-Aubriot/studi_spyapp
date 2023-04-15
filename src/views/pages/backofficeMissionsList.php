@@ -2,8 +2,6 @@
   ob_start();
 ?>
 
-<h2 class="blink_me" id="blink"><span id="txtHint"></span><?= $message ?></h2>
-
 <div class="tableContainer">
     <table class="mb-5 me-2">
 
@@ -23,7 +21,7 @@
                 <td>Nom de code</td>
                 <td>Titre</td>
                 <td>Description</td>
-                <td>Pays</td>
+                <td>Pays (iso-3 ex: 'FRA')</td>
                 <td>Agents</td>
                 <td>Contacts</td>
                 <td>Cibles</td>
@@ -50,16 +48,16 @@
                         <input type="text" name="desc" value="<?= $mission['description_de_mission'] ?>" id="<?= 'input-2-'.$iteration ?>"></input>
                     </td>
                     <td> 
-                        <input type="text" name="pays"value="<?= $mission['pays'] ?>" id="<?= 'input-3-'.$iteration ?>"></input> 
+                        <input type="text" name="pays"value="<?= $mission['pays'] ?>" id="<?= 'input-3-'.$iteration ?>" onkeyup="showHint(this.value,'pays')"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="agents" value="<?= $mission['agents'] ?>" id="<?= 'input-4-'.$iteration ?>"></input> 
+                        <input type="text" name="agents" value="<?= $mission['agents'] ?>" id="<?= 'input-4-'.$iteration ?>" onkeyup="showHint(this.value,'agent')"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="contacts" value="<?= $mission['contacts'] ?>" id="<?= 'input-5-'.$iteration ?>"></input> 
+                        <input type="text" name="contacts" value="<?= $mission['contacts'] ?>" id="<?= 'input-5-'.$iteration ?>" onkeyup="showHint(this.value,'contact')"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="cibles" value="<?= $mission['cibles'] ?>" id="<?= 'input-6-'.$iteration ?>"></input> 
+                        <input type="text" name="cibles" value="<?= $mission['cibles'] ?>" id="<?= 'input-6-'.$iteration ?>" onkeyup="showHint(this.value,'cible')"></input> 
                     </td>
                     <td> 
                         <input type="text" name="type" value="<?= $mission['type_de_mission'] ?>" id="<?= 'input-7-'.$iteration ?>"></input> 
@@ -68,7 +66,7 @@
                         <input type="text" name="statut" value="<?= $mission['statut'] ?>" id="<?= 'input-8-'.$iteration ?>"></input> 
                     </td>
                     <td> 
-                        <input type="text" name="planques" value="<?= $mission['planques'] ?>" id="<?= 'input-9-'.$iteration ?>"></input> 
+                        <input type="text" name="planques" value="<?= $mission['planques'] ?>" id="<?= 'input-9-'.$iteration ?>" onkeyup="showHint(this.value,'planque')"></input> 
                     </td>
                     <td> 
                         <input type="text" name="spé" value="<?= $mission['spécialités'] ?>"  id="<?= 'input-10-'.$iteration ?>"></input> 
@@ -110,7 +108,9 @@
 
 </div>
 
-<div id="logs" class="mt-4 container">
+<h2 class="blink_me mt-2" id="blink"><span id="txtHint"></span><?= $message ?></h2>
+
+<div id="logs" class="mt-2 container">
 
 </div>
 

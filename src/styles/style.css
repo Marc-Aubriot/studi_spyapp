@@ -18,6 +18,7 @@ header {
 
 main {
     height: 94vh;
+    overflow-y: auto;
 }
 
 footer {
@@ -111,15 +112,21 @@ table, tr, td {
     height: 5vh;
 }
 
+.spyapp {
+    position: absolute;
+    top: 45vh;
+    left: 45vw;
+    font-size: xx-large;
+}
 /* MODAL */
 .modalBox {
     background-color: black;
     border: 2px solid rgb(25, 214, 25);
     color: rgb(25, 214, 25);
-    height: 20vh;
+    height: 25vh;
     width: 70vw;
     position: absolute;
-    top: 25vh;
+    top: 10vh;
     left: 15vw;
     overflow-y: auto;
     padding: 20px;
