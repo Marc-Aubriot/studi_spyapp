@@ -1,4 +1,4 @@
-# on créé la DB
+# on créé la DB (modifier le nom de la DB dans la requête CREATE DATABASE & USE en fonction des besoins de la DB du serveur)
 CREATE DATABASE spyappDB;
 USE spyappDB;
 

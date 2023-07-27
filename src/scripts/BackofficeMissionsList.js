@@ -201,7 +201,7 @@ function getTable(strArray) {
         div.innerHTML = this.responseText;
         };
     };
-    xmlhttp.open("GET",  `../../../src/service/gettable.php?q=` + strArray, true);
+    xmlhttp.open("GET",  `/../../public/request.php?action=gettable&q=` + strArray , true);
     xmlhttp.send();
 }
 

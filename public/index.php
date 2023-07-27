@@ -6,6 +6,14 @@ session_start();
 require __DIR__ . '/../config.php';
 require ROOT . '/src/controllers/Controller.php';
 
+// identification pour session locale (désactiver dans le dossier config DEBUG> false)
+if (DEBUG) {
+    require ROOT . '/src/models/Admin.php';
+    $user = Admin::checkAdmin(DEBUG_ADMIN_MAIL, DEBUG_ADMIN_PASS);
+    $_SESSION['user_admin'] = $user;
+    $token = $_SESSION["user_token"] = Controller::guidv4();
+}
+
 // prend l'uri
 $request = $_SERVER['REQUEST_URI'];
 
